@@ -9,6 +9,7 @@ package com.egg.HuertaAgroecologica.enumeraciones;
  *
  * @author POSITIVO BGH
  */
-public class Rol {
-    
+public enum Rol {
+    GUEST,
+    ADMIN;
 }
