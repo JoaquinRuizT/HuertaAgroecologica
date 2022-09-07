@@ -1,7 +1,17 @@
 package com.egg.HuertaAgroecologica.entidades;
 
-public class Foto {
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import org.hibernate.annotations.GenericGenerator;
 
+@Entity
+public class Foto implements Serializable {
+    
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     private String mime;
     private String nombre;

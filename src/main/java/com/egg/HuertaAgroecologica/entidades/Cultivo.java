@@ -1,14 +1,32 @@
 package com.egg.HuertaAgroecologica.entidades;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import org.hibernate.annotations.GenericGenerator;
 
-public abstract class Cultivo {
-
+@Entity
+public abstract class Cultivo implements Serializable {
+    
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private int id;
     private String nombre;
     private String tipoCultivo;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
     private boolean alta;
+    private double temperatura;
+    private String agua;
+    private String luz;
+    private String suelo;
+    private String estacion;
+    private double viento;
+    private Foto imagenCultivo;
     private String observaciones;
 
     public Cultivo() {
