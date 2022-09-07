@@ -33,7 +33,7 @@ public class UsuarioServicio {
         
         usuario.setRol(Rol.GUEST);
         
-        
+        //AGREGAMOS FOTO DE PERFIL A USUARIO?
         
         usuarioRepositorio.save(usuario);
         
