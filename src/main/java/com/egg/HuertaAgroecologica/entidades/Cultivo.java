@@ -9,7 +9,7 @@ import javax.persistence.Temporal;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-public abstract class Cultivo implements Serializable {
+public class Cultivo implements Serializable {
     
     @Id
     @GeneratedValue(generator = "uuid")

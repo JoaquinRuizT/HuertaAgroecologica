@@ -12,6 +12,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  *
@@ -20,8 +21,9 @@ import javax.persistence.Id;
 @Entity
 public class Usuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private String id;
     private String nombre;
     private String email;
     private String password;
@@ -32,7 +34,7 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(Long id, String nombre, String email, String password, Rol rol) {
+    public Usuario(String id, String nombre, String email, String password, Rol rol) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
@@ -40,11 +42,11 @@ public class Usuario {
         this.rol = rol;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -79,6 +81,8 @@ public class Usuario {
     public void setRol(Rol rol) {
         this.rol = rol;
     }
+
+    
     
     
     
