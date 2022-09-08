@@ -14,7 +14,7 @@ public class Cultivo implements Serializable {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private int id;
+    private String id;
     private String nombre;
     private String tipoCultivo;
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -32,7 +32,7 @@ public class Cultivo implements Serializable {
     public Cultivo() {
     }
 
-    public Cultivo(int id, String nombre, String tipoCultivo, Date fecha, boolean alta, String observaciones) {
+    public Cultivo(String id, String nombre, String tipoCultivo, Date fecha, boolean alta, String observaciones) {
         this.id = id;
         this.nombre = nombre;
         this.tipoCultivo = tipoCultivo;
@@ -41,11 +41,11 @@ public class Cultivo implements Serializable {
         this.observaciones = observaciones;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

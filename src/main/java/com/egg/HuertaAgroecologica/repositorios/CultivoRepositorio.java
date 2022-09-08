@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CultivoRepositorio extends JpaRepository<Cultivo, Integer>{
+public interface CultivoRepositorio extends JpaRepository<Cultivo, String>{
     
     @Query("SELECT c FROM Cultivo c WHERE c.nombre = :nombre")
     public Cultivo buscarPorNombre(@Param("nombre") String nombre);
