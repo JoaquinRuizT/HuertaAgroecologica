@@ -32,14 +32,79 @@ public class Cultivo implements Serializable {
     public Cultivo() {
     }
 
-    public Cultivo(String id, String nombre, String tipoCultivo, Date fecha, boolean alta, String observaciones) {
+    public Cultivo(String id, String nombre, String tipoCultivo, Date fecha, boolean alta, double temperatura, String agua, String luz, String suelo, String estacion, double viento, Foto imagenCultivo, String observaciones) {
         this.id = id;
         this.nombre = nombre;
         this.tipoCultivo = tipoCultivo;
         this.fecha = fecha;
         this.alta = alta;
+        this.temperatura = temperatura;
+        this.agua = agua;
+        this.luz = luz;
+        this.suelo = suelo;
+        this.estacion = estacion;
+        this.viento = viento;
+        this.imagenCultivo = imagenCultivo;
         this.observaciones = observaciones;
     }
+
+    public double getTemperatura() {
+        return temperatura;
+    }
+
+    public void setTemperatura(double temperatura) {
+        this.temperatura = temperatura;
+    }
+
+    public String getAgua() {
+        return agua;
+    }
+
+    public void setAgua(String agua) {
+        this.agua = agua;
+    }
+
+    public String getLuz() {
+        return luz;
+    }
+
+    public void setLuz(String luz) {
+        this.luz = luz;
+    }
+
+    public String getSuelo() {
+        return suelo;
+    }
+
+    public void setSuelo(String suelo) {
+        this.suelo = suelo;
+    }
+
+    public String getEstacion() {
+        return estacion;
+    }
+
+    public void setEstacion(String estacion) {
+        this.estacion = estacion;
+    }
+
+    public double getViento() {
+        return viento;
+    }
+
+    public void setViento(double viento) {
+        this.viento = viento;
+    }
+
+    public Foto getImagenCultivo() {
+        return imagenCultivo;
+    }
+
+    public void setImagenCultivo(Foto imagenCultivo) {
+        this.imagenCultivo = imagenCultivo;
+    }
+
+  
 
     public String getId() {
         return id;
@@ -91,7 +156,8 @@ public class Cultivo implements Serializable {
 
     @Override
     public String toString() {
-        return "Cultivo{" + "id=" + id + ", nombre=" + nombre + ", tipoCultivo=" + tipoCultivo + ", fecha=" + fecha + ", alta=" + alta + ", observaciones=" + observaciones + '}';
-    }   
-    
+        return "Cultivo{" + "id=" + id + ", nombre=" + nombre + ", tipoCultivo=" + tipoCultivo + ", fecha=" + fecha + ", alta=" + alta + ", temperatura=" + temperatura + ", agua=" + agua + ", luz=" + luz + ", suelo=" + suelo + ", estacion=" + estacion + ", viento=" + viento + ", imagenCultivo=" + imagenCultivo + ", observaciones=" + observaciones + '}';
+    }
+
+   
 }

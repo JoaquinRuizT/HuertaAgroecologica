@@ -7,6 +7,7 @@ import com.egg.HuertaAgroecologica.excepciones.MiExcepcion;
 import com.egg.HuertaAgroecologica.repositorios.UsuarioRepositorio;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -67,6 +68,30 @@ public class UsuarioServicio implements UserDetailsService {
 
     }
 
+    @Transactional
+    public void modificarUsuario (MultipartFile archivo, String nombre, String email, String password, String password2, String id) throws MiExcepcion{
+        validarUsuario(nombre, email, password, password2);
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+        if (respuesta.isPresent()){
+            Usuario usuario = respuesta.get();
+            usuario.setEmail(email);
+            usuario.setNombre(nombre);
+            usuario.setPassword(password);
+            //usuario.getRol();
+            usuarioRepositorio.save(usuario);
+        }
+    }
+    
+    @Transactional
+    public void eliminarUsuario(String id){
+       
+         Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+        if (respuesta.isPresent()){
+            Usuario usuario = respuesta.get();
+            usuarioRepositorio.delete(usuario);
+            //dejamos delete? o le damos de baja con un atributo de tipo boleano?
+    }
+    }
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
