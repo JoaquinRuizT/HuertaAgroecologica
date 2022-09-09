@@ -24,34 +24,32 @@ public class UsuarioServicio implements UserDetailsService {
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
-    
+
     @Autowired
     private FotoServicio fotoServicio;
-    
+
     @Transactional
-    public void registrar(MultipartFile archivo, String nombre, String email, String password, String password2) throws MiExcepcion{
-        
+    public void registrar(MultipartFile archivo, String nombre, String email, String password, String password2) throws MiExcepcion {
+
         validarUsuario(nombre, email, password, password2);
-        
+
         Usuario usuario = new Usuario();
-        
+
         usuario.setNombre(nombre);
         usuario.setEmail(email);
-        
-       
+
         //FALTA SETEAR PASSWORD (SPRING SECURITY)
         usuario.setPassword(password);
-        
+
         usuario.setRol(Rol.GUEST);
-        
+
         //AGREGAMOS FOTO DE PERFIL A USUARIO?
-        
         usuarioRepositorio.save(usuario);
-        
+
     }
-    
-    private void validarUsuario(String nombre, String email, String password, String password2) throws MiExcepcion{
-        
+
+    private void validarUsuario(String nombre, String email, String password, String password2) throws MiExcepcion {
+
         if (nombre.isEmpty() || nombre == null) {
             throw new MiExcepcion("el nombre no puede ser nulo o estar vacío");
         }
@@ -69,10 +67,10 @@ public class UsuarioServicio implements UserDetailsService {
     }
 
     @Transactional
-    public void modificarUsuario (MultipartFile archivo, String nombre, String email, String password, String password2, String id) throws MiExcepcion{
+    public void modificarUsuario(MultipartFile archivo, String nombre, String email, String password, String password2, String id) throws MiExcepcion {
         validarUsuario(nombre, email, password, password2);
         Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
-        if (respuesta.isPresent()){
+        if (respuesta.isPresent()) {
             Usuario usuario = respuesta.get();
             usuario.setEmail(email);
             usuario.setNombre(nombre);
@@ -83,27 +81,37 @@ public class UsuarioServicio implements UserDetailsService {
     }
     
     @Transactional
-    public void eliminarUsuario(String id){
-       
-         Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
-        if (respuesta.isPresent()){
+    public boolean loginCheck(String email, String password){
+        Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
+        if(usuario != null && usuario.getPassword().equals(password)){
+            return true;
+        }
+        return false;
+        
+    }
+
+    @Transactional
+    public void eliminarUsuario(String id) {
+
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+        if (respuesta.isPresent()) {
             Usuario usuario = respuesta.get();
             usuarioRepositorio.delete(usuario);
             //dejamos delete? o le damos de baja con un atributo de tipo boleano?
+        }
     }
-    }
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
         if (usuario != null) {
             List<GrantedAuthority> permisos = new ArrayList();
-            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_"+ usuario.getRol().toString());
+            GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
             permisos.add(p);
             return new User(usuario.getEmail(), usuario.getPassword(), permisos);
-        }else{
+        } else {
             return null;
         }
     }
-    
-    
+
 }
