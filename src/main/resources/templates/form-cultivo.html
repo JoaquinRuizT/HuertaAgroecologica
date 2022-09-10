@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
     <head>
         <meta charset="utf-8">
@@ -34,54 +34,61 @@
 
         <div class="container">
             <header>Registro del cultivo</header>
-            <form th:action="@{/registro}" method="POST" enctype="multipart/form-data">
+            <form th:action="@{cultivo/registro}" method="POST" enctype="multipart/form-data">
                 <div class="form-first">
                     <div class="details-compound">
                         <span class="title">Detalles</span>
                         <div class="fields">
                             <div class="input-field">
-                                <label for="">Especie</label>
-                                <input type="text" name="" class="form-control" placeholder="" th:value="${especie}">
+                                <label for="">Nombre</label>
+                                <input type="text" name="nombre" class="form-control" th:value="${nombre}">
                             </div>
 
                             <div class="input-field">
-                                <label for="">Variedad</label>
-                                <input type="text" name="" class="form-control" placeholder="" th:value="${variedad}">
+                                <label for="">Tipo de Cultivo</label>
+                                <select class="form-select" aria-label="Default select example" th:name="tipoCultivo" th:value="${tipoCultivo}">
+                        
+                        <option value="Frutas">Frutas</option>
+                        <option value="Vegetales">Vegetales</option>
+                        <option value="Arboles">Arboles</option>
+                        
+                      </select> 
                             </div>
 
                             <div class="input-field">
-                                <label for="">Epoca de Siembra</label>
-                                <input type="text" name="" class="form-control" placeholder="" th:value="${epoca}">
+                                <label for="">Temperatura (°C)</label>
+                                <input type="text" name="temperatura" class="form-control" th:value="${temperatura}">
                             </div>
 
                             <div class="input-field">
-                                <label for="">Forma de siembra</label>
-                                <input type="text" name="" class="form-control" placeholder="" th:value="${forma}">
+                                <label for="">Requerimiento de Agua (m3)</label>
+                                <input type="text" name="agua" class="form-control"  th:value="${agua}">
                             </div>
 
                             <div class="input-field">
-                                <label for="">Distancia entre plantas (cm)</label>
-                                <input type="text" name="" class="form-control" placeholder="" th:value="${distancia}">
+                                <label for="">Requerimiento de Luz (h)</label>
+                                <input type="text" name="luz" class="form-control" th:value="${luz}">
                             </div>
 
                             <div class="input-field">
-                                <label for="">Dias a cosecha</label>
-                                <input type="text" name="" class="form-control" placeholder="" th:value="${dias}">
+                                <label for="">Suelo (Ingresar pH del suelo)</label>
+                                <input type="text" name="suelo" class="form-control" th:value="${suelo}">
                             </div>
 
                             <div class="input-field">
-                                <label for="">Cantidad de Agua requerida para el cultivo (mm)</label>
-                                <input type="text" name="" class="form-control" placeholder="" th:value="${agua}">
+                                <label for="">Estación (Verano, Otoño, Invierno, Primavera)</label>
+                                 <select class="form-select" aria-label="Default select example" th:name="estacion" th:value="${estacion}">
+                        
+                        <option value="Invierno">Invierno</option>
+                        <option value="Otoño">Otoño</option>
+                        <option value="Primavera">Primavera</option>
+                        <option value="Verano">Verano</option>
+                      </select> 
                             </div>
 
-                            <div class="input-field">
-                                <label for="">Tiempo de Luz requerido para el cultivo (h)</label>
-                                <input type="text" name="" class="form-control" placeholder="" th:value="${luz}">
-                            </div>
-
-                            <div class="input-field">
-                                <label for="">Tiempo de Luz requerido (h)</label>
-                                <input type="text" name="" class="form-control" placeholder="" th:value="${luz2}">
+                           <div class="input-field">
+                                <label for="">Observaciones</label>
+                                <input type="text" name="observaciones" class="form-control" th:value="${observaciones}">
                             </div>
 
 

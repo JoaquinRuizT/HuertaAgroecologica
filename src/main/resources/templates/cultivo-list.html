@@ -6,6 +6,7 @@
     <title>Lista cultivos</title>
     <link rel="stylesheet" href="/css/estilo-pocp.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous" />
   </head>
   <body>
     <header>
@@ -28,25 +29,36 @@
                     <tr>
                         
                         <th scope="col">Nombre</th>
-                        <th scope="col">Especie</th>
-                        <th scope="col">Variedad</th>
+                        <th scope="col">tipoCultivo</th>
+                        <th scope="col">temperatura</th>
                         <th scope="col">Agua</th>
+                        <th scope="col">Luz</th>
+                        <th scope="col">Suelo (pH)</th>
+                        <th scope="col">Estación</th>
                         <th scope="col">Foto</th>
+                        <th scope="col">Estado</th>
                         <th scope="col">Acción</th>
                         
                     </tr>
                 </thead>
-                <tbody th:each="ap:${potenciales}">
+                <tbody th:each="lista:${listacultivos}">
                 	<tr>
-                	
-                        <th th:text="${ap.nombre}"></th>
-                        <th th:text="${ap.formula}"></th>
-                        <td th:text="${ap.potencialPocp}"></td>
-                        <th th:text="${ap.region}"></th>
-                        <th th:text="${ap.foto}"></th>
+                	<th th:text="${lista.id}"></th>
+                        <th th:text="${lista.nombre}"></th>
+                        <th th:text="${lista.tipoCultivo}"></th>
+                        <td th:text="${lista.temperatura}"></td>
+                        <th th:text="${lista.agua}"></th>
+                        <th th:text="${lista.luz}"></th>
+                        <th th:text="${lista.suelo}"></th>
+                        <th th:text="${lista.estacion}"></th>
+                        <th th:text="${lista.foto}"></th>
+                        <td>
+						<i th:if="${lista.alta}" class="fa fa-circle text-success"></i>
+						<i th:unless="${lista.alta}" class="fa fa-circle" style="color:red;"></i>
+					</td>
                        <td>
-                       <a th:href="@{/ap/modificarap/__${ap.id}__}" class="btn btn-warning">Modificar</a>
-                       <a th:href="@{/ap/eliminar/__${ap.id}__}" class="btn btn-danger">Eliminar</a>
+                       <a th:href="@{/cultivo/modificar/__${lista.id}__}" class="btn btn-warning">Modificar</a>
+                       <a th:href="@{/cultivo/eliminar/__${lista.id}__}" class="btn btn-danger">Eliminar</a>
                        </td>
                     </tr>
                     
