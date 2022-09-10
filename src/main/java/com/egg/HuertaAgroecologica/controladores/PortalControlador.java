@@ -32,8 +32,17 @@ public class PortalControlador { //localhost:8080/??
     private UsuarioServicio usuarioServicio;
     
     @GetMapping("/")
-    public String index() {
-        return "index.html";
+    public String login() {
+        return "login.html";
+    }
+    
+    @PostMapping("/logincheck")
+    public String loginCheck(@RequestParam String email, @RequestParam String password, ModelMap modelo){
+        if(usuarioServicio.loginCheck(email, password)){
+             return "index.html";
+        }
+        modelo.put("error", "Email o contraseña incorrecta");
+        return "login.html";
     }
     
     @GetMapping("/registrar")
@@ -60,20 +69,10 @@ public class PortalControlador { //localhost:8080/??
         }
     }
     
-    @GetMapping("/login")
-    public String login() {
-        return "login.html";
-    }
-    
-    @PostMapping("/logincheck")
-    public String loginCheck(@RequestParam String email, @RequestParam String password, ModelMap modelo){
-        if(usuarioServicio.loginCheck(email, password)){
-             return "index.html";
-        }
-        modelo.put("error", "Email o contraseña incorrecta");
-        return "login.html";
-    }
-    
+    @GetMapping("/inicio")
+    public String index() {
+        return "index.html";
+    }    
     
 //    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
 //    @GetMapping("/inicio")
@@ -85,7 +84,7 @@ public class PortalControlador { //localhost:8080/??
 //            return "redirect:/admin/dashboard";
 //        }
 //        
-//           return "inicio.html";
+//           return "index.html";
 //    }
-    
+//    
 }
