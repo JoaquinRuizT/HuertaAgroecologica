@@ -25,10 +25,11 @@ public class Cultivo implements Serializable {
     private String luz;
     private String suelo;
     private String estacion;
-    private double viento;
+    private String viento;
     private Foto imagenCultivo;
     private String observaciones;
-
+    //tipoDeRiego
+    
     public Cultivo() {
     }
 

@@ -14,8 +14,7 @@ public class FotoServicio {
 
     @Autowired
     private FotoRepositorio fotoRepositorio;
-    //no sabemos si va el transactional aca. Se lo acabamos de agregar
-    //@Transactional
+
     public Foto guardar(MultipartFile archivo) throws MiExcepcion {
         if (archivo != null) {
 
@@ -35,7 +34,6 @@ public class FotoServicio {
         return null;
     }
 
-    //@Transactional
     public Foto actualizar(MultipartFile archivo, String idFoto) throws MiExcepcion {
         if (archivo != null) {
 
@@ -49,7 +47,7 @@ public class FotoServicio {
                         foto = respuesta.get();
                     }
                 }
-
+                
                 guardar(archivo);
 
             } catch (Exception e) {
