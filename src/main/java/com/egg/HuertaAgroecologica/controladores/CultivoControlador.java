@@ -28,7 +28,7 @@ public class CultivoControlador {
     @PostMapping("/registro")
     public String registro(@RequestParam String nombre, @RequestParam String tipoCultivo, 
             @RequestParam String temperatura, @RequestParam String agua, @RequestParam String luz,
-            @RequestParam String suelo, @RequestParam String estacion, String observaciones, MultipartFile archivo, ModelMap modelo){
+            @RequestParam String suelo, @RequestParam String estacion, String observaciones,@RequestParam MultipartFile archivo, ModelMap modelo){
         try {
             cultivoServicio.crearCultivo(nombre, tipoCultivo, true, temperatura, agua, luz, suelo, estacion, suelo, observaciones, archivo);
             

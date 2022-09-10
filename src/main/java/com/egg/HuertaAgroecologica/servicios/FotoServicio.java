@@ -49,7 +49,7 @@ public class FotoServicio {
                         foto = respuesta.get();
                     }
                 }
-                
+
                 guardar(archivo);
 
             } catch (Exception e) {
@@ -69,12 +69,22 @@ public class FotoServicio {
             //dejamos delete? o le damos de baja con un atributo de tipo boleano?
         }
     }
-    
+
     //agregar este metodo en Foto?
-    public List<Foto> listarFotos(){
-        List<Foto> fotos=new ArrayList();
-        fotos= fotoRepositorio.findAll();
+    public List<Foto> listarFotos() {
+        List<Foto> fotos = new ArrayList();
+        fotos = fotoRepositorio.findAll();
         return fotos;
     }
 
+    public Foto buscarPorId(String id) {
+        Optional<Foto> respuesta = fotoRepositorio.findById(id);
+        if (respuesta.isPresent()) {
+            Foto foto = respuesta.get();
+            return foto;
+
+        }
+        return new Foto();
+
+    }
 }
