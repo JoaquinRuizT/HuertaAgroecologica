@@ -100,6 +100,13 @@ public class UsuarioServicio implements UserDetailsService {
             //dejamos delete? o le damos de baja con un atributo de tipo boleano?
         }
     }
+    
+    //agregar este metodo a Usuario?
+    public List<Usuario> listarUsuarios(){
+        List<Usuario> usuarios=new ArrayList();
+        usuarios= usuarioRepositorio.findAll();
+        return usuarios;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
