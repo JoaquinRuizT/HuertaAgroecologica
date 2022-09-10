@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -26,14 +27,17 @@ public class Cultivo implements Serializable {
     private String suelo;
     private String estacion;
     private String viento;
-    private Foto imagenCultivo;
     private String observaciones;
+    
+    @OneToOne
+    private Foto imagenCultivo;
+    
     //tipoDeRiego
     
     public Cultivo() {
     }
 
-    public Cultivo(String id, String nombre, String tipoCultivo, Date fecha, boolean alta, double temperatura, String agua, String luz, String suelo, String estacion, double viento, Foto imagenCultivo, String observaciones) {
+    public Cultivo(String id, String nombre, String tipoCultivo, Date fecha, boolean alta, double temperatura, String agua, String luz, String suelo, String estacion, String viento, Foto imagenCultivo, String observaciones) {
         this.id = id;
         this.nombre = nombre;
         this.tipoCultivo = tipoCultivo;
@@ -48,6 +52,8 @@ public class Cultivo implements Serializable {
         this.imagenCultivo = imagenCultivo;
         this.observaciones = observaciones;
     }
+
+   
 
     public double getTemperatura() {
         return temperatura;
@@ -89,14 +95,15 @@ public class Cultivo implements Serializable {
         this.estacion = estacion;
     }
 
-    public double getViento() {
+    public String getViento() {
         return viento;
     }
 
-    public void setViento(double viento) {
+    public void setViento(String viento) {
         this.viento = viento;
     }
 
+   
     public Foto getImagenCultivo() {
         return imagenCultivo;
     }
