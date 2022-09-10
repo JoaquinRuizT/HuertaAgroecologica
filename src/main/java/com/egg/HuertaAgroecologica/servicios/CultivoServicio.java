@@ -28,13 +28,12 @@ public class CultivoServicio {
     private FotoServicio fotoServicio;
     
     @Transactional
-    public void crearCultivo(String nombre, String tipoCultivo, Date fecha, boolean alta, double temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo) throws MiExcepcion{
+    public void crearCultivo(String nombre, String tipoCultivo, boolean alta, String temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo) throws MiExcepcion{
         //vamos a hacer metodo validar?
         Cultivo cultivo= new Cultivo();
         
         cultivo.setNombre(nombre);
         cultivo.setTipoCultivo(tipoCultivo);
-        cultivo.setFecha(fecha);
         cultivo.setAlta(alta);
         cultivo.setTemperatura(temperatura);
         cultivo.setAgua(agua);
@@ -51,7 +50,7 @@ public class CultivoServicio {
         
     }
     @Transactional
-    public void modificarCultivo (String id,String nombre, String tipoCultivo, Date fecha, boolean alta, double temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo) throws MiExcepcion{
+    public void modificarCultivo (String id,String nombre, String tipoCultivo, Date fecha, boolean alta, String temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo) throws MiExcepcion{
         //vamos a hacer metodo validar?
         Optional<Cultivo> respuesta = cultivoRepositorio.findById(id);
         if (respuesta.isPresent()){

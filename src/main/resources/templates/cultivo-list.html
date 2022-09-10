@@ -41,7 +41,7 @@
                         
                     </tr>
                 </thead>
-                <tbody th:each="lista:${listacultivos}">
+                <tbody th:each="lista:${cultivos}">
                 	<tr>
                 	<th th:text="${lista.id}"></th>
                         <th th:text="${lista.nombre}"></th>
@@ -51,7 +51,7 @@
                         <th th:text="${lista.luz}"></th>
                         <th th:text="${lista.suelo}"></th>
                         <th th:text="${lista.estacion}"></th>
-                        <th th:text="${lista.foto}"></th>
+                        <th th:text="${lista.imagenCultivo}"></th>
                         <td>
 						<i th:if="${lista.alta}" class="fa fa-circle text-success"></i>
 						<i th:unless="${lista.alta}" class="fa fa-circle" style="color:red;"></i>

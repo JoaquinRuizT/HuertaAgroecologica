@@ -21,7 +21,7 @@ public class Cultivo implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
     private boolean alta;
-    private double temperatura;
+    private String temperatura;
     private String agua;
     private String luz;
     private String suelo;
@@ -37,7 +37,7 @@ public class Cultivo implements Serializable {
     public Cultivo() {
     }
 
-    public Cultivo(String id, String nombre, String tipoCultivo, Date fecha, boolean alta, double temperatura, String agua, String luz, String suelo, String estacion, String viento, Foto imagenCultivo, String observaciones) {
+    public Cultivo(String id, String nombre, String tipoCultivo, Date fecha, boolean alta, String temperatura, String agua, String luz, String suelo, String estacion, String viento, Foto imagenCultivo, String observaciones) {
         this.id = id;
         this.nombre = nombre;
         this.tipoCultivo = tipoCultivo;
@@ -55,11 +55,11 @@ public class Cultivo implements Serializable {
 
    
 
-    public double getTemperatura() {
+    public String getTemperatura() {
         return temperatura;
     }
 
-    public void setTemperatura(double temperatura) {
+    public void setTemperatura(String temperatura) {
         this.temperatura = temperatura;
     }
 
