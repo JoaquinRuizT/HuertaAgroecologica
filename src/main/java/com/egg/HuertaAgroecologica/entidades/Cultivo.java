@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -26,8 +27,11 @@ public class Cultivo implements Serializable {
     private String suelo;
     private String estacion;
     private String viento;
-    private Foto imagenCultivo;
     private String observaciones;
+    
+    @OneToOne
+    private Foto imagenCultivo;
+    
     //tipoDeRiego
     
     public Cultivo() {
@@ -49,45 +53,7 @@ public class Cultivo implements Serializable {
         this.observaciones = observaciones;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getTipoCultivo() {
-        return tipoCultivo;
-    }
-
-    public void setTipoCultivo(String tipoCultivo) {
-        this.tipoCultivo = tipoCultivo;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public boolean isAlta() {
-        return alta;
-    }
-
-    public void setAlta(boolean alta) {
-        this.alta = alta;
-    }
+   
 
     public double getTemperatura() {
         return temperatura;
@@ -137,12 +103,55 @@ public class Cultivo implements Serializable {
         this.viento = viento;
     }
 
+   
     public Foto getImagenCultivo() {
         return imagenCultivo;
     }
 
     public void setImagenCultivo(Foto imagenCultivo) {
         this.imagenCultivo = imagenCultivo;
+    }
+
+  
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getTipoCultivo() {
+        return tipoCultivo;
+    }
+
+    public void setTipoCultivo(String tipoCultivo) {
+        this.tipoCultivo = tipoCultivo;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public boolean isAlta() {
+        return alta;
+    }
+
+    public void setAlta(boolean alta) {
+        this.alta = alta;
     }
 
     public String getObservaciones() {
@@ -157,7 +166,6 @@ public class Cultivo implements Serializable {
     public String toString() {
         return "Cultivo{" + "id=" + id + ", nombre=" + nombre + ", tipoCultivo=" + tipoCultivo + ", fecha=" + fecha + ", alta=" + alta + ", temperatura=" + temperatura + ", agua=" + agua + ", luz=" + luz + ", suelo=" + suelo + ", estacion=" + estacion + ", viento=" + viento + ", imagenCultivo=" + imagenCultivo + ", observaciones=" + observaciones + '}';
     }
-    
-    
+
    
 }

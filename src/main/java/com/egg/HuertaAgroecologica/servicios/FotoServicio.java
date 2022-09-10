@@ -3,6 +3,8 @@ package com.egg.HuertaAgroecologica.servicios;
 import com.egg.HuertaAgroecologica.entidades.Foto;
 import com.egg.HuertaAgroecologica.excepciones.MiExcepcion;
 import com.egg.HuertaAgroecologica.repositorios.FotoRepositorio;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +68,13 @@ public class FotoServicio {
             fotoRepositorio.delete(foto);
             //dejamos delete? o le damos de baja con un atributo de tipo boleano?
         }
+    }
+    
+    //agregar este metodo en Foto?
+    public List<Foto> listarFotos(){
+        List<Foto> fotos=new ArrayList();
+        fotos= fotoRepositorio.findAll();
+        return fotos;
     }
 
 }
