@@ -104,6 +104,30 @@ public class CultivoServicio {
         return frutas;
     }
 
+    /*Metodo para leer 1 solo cultivo*/
+    @Transactional(readOnly = true)
+    public Cultivo getOne(String id) {
+        return cultivoRepositorio.getOne(id);
+    }
+    
+    /*método para "eliminar" sigue en la base de datos pero esta en el estado de BAJA*/
+    public void alta(String id) {
+
+        Cultivo entidad = cultivoRepositorio.getOne(id);
+
+        entidad.setAlta(true);
+        cultivoRepositorio.save(entidad);
+    }
+    
+    /*método para "eliminar" sigue en la base de datos pero esta en el estado de BAJA*/
+    public void baja(String id) {
+
+        Cultivo entidad = cultivoRepositorio.getOne(id);
+
+        entidad.setAlta(false);
+        cultivoRepositorio.save(entidad);
+    }
+
     //ver si agregamos validarCultivo para crear/modificar (llamar al validar en esos métodos)
 //    private void validarCultivo(String id,String nombre, String tipoCultivo, Date fecha, boolean alta, 
 //            double temperatura, String agua, String luz, String suelo, String estacion, String viento, 
