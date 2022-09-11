@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,7 +34,8 @@ public class CultivoServicio {
         
         cultivo.setNombre(nombre);
         cultivo.setTipoCultivo(tipoCultivo);
-        cultivo.setAlta(alta);
+        cultivo.setAlta(true);
+        cultivo.setFecha(new Date());
         cultivo.setTemperatura(temperatura);
         cultivo.setAgua(agua);
         cultivo.setLuz(luz);
@@ -50,7 +51,7 @@ public class CultivoServicio {
         
     }
     @Transactional
-    public void modificarCultivo (String id,String nombre, String tipoCultivo, Date fecha, boolean alta, String temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo) throws MiExcepcion{
+    public void modificarCultivo (String id,String nombre, String tipoCultivo, String temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo) throws MiExcepcion{
         //vamos a hacer metodo validar?
         Optional<Cultivo> respuesta = cultivoRepositorio.findById(id);
         if (respuesta.isPresent()){
@@ -58,8 +59,9 @@ public class CultivoServicio {
             
         cultivo.setNombre(nombre);
         cultivo.setTipoCultivo(tipoCultivo);
-        cultivo.setFecha(fecha);
-        cultivo.setAlta(alta);
+        
+        cultivo.setFecha(new Date());
+        cultivo.setAlta(true);
         cultivo.setTemperatura(temperatura);
         cultivo.setAgua(agua);
         cultivo.setLuz(luz);
@@ -74,6 +76,25 @@ public class CultivoServicio {
        cultivoRepositorio.save(cultivo);
         }
     }
+
+    /*método para "eliminar" sigue en la base de datos pero esta en el estado de BAJA*/
+    public void baja(String id) {
+
+        Cultivo entidad = cultivoRepositorio.getOne(id);
+
+        entidad.setAlta(false);
+        cultivoRepositorio.save(entidad);
+    }
+    
+       /*método para "eliminar" sigue en la base de datos pero esta en el estado de BAJA*/
+    public void alta(String id) {
+
+        Cultivo entidad = cultivoRepositorio.getOne(id);
+
+        entidad.setAlta(true);
+        cultivoRepositorio.save(entidad);
+    }
+
     
     @Transactional
     public void eliminarCultivo(String id){
@@ -133,4 +154,10 @@ public class CultivoServicio {
 //        //observaciones podrían ser nulas/vacías
 //        
 //    }
+    /*Metodo para leer 1 solo cultivo*/
+    @Transactional(readOnly = true)
+	public Cultivo getOne(String id) {
+		return cultivoRepositorio.getOne(id);
+	}
+	
 }
