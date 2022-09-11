@@ -76,7 +76,7 @@ public class CultivoControlador {
 
         try {
             cultivoServicio.baja(id);
-            return "redirect:../cultivo-list";
+            return "redirect:../lista";
         } catch (Exception e) {
             return "redirect:/";
         }
@@ -88,7 +88,7 @@ public class CultivoControlador {
 
         try {
             cultivoServicio.alta(id);
-            return "redirect:../cultivo-list";
+            return "redirect:../lista";
         } catch (Exception e) {
             return "redirect:/";
         }
