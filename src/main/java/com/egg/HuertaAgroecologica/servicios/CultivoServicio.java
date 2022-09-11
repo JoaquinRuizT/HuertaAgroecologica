@@ -1,4 +1,3 @@
-
 package com.egg.HuertaAgroecologica.servicios;
 
 import com.egg.HuertaAgroecologica.entidades.Cultivo;
@@ -12,6 +11,7 @@ import java.util.Optional;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -20,22 +20,21 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Service
 public class CultivoServicio {
-    
+
     @Autowired
     private CultivoRepositorio cultivoRepositorio;
-  
+
     @Autowired
     private FotoServicio fotoServicio;
-    
+
     @Transactional
-    public void crearCultivo(String nombre, String tipoCultivo, boolean alta, String temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo) throws MiExcepcion{
-        //vamos a hacer metodo validar?
-        Cultivo cultivo= new Cultivo();
-        
+    public void crearCultivo(String nombre, String tipoCultivo, boolean alta, String temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo) throws MiExcepcion {
+//vamos a hacer metodo validar?
+        Cultivo cultivo = new Cultivo();
+
         cultivo.setNombre(nombre);
         cultivo.setTipoCultivo(tipoCultivo);
         cultivo.setAlta(true);
-        cultivo.setFecha(new Date());
         cultivo.setTemperatura(temperatura);
         cultivo.setAgua(agua);
         cultivo.setLuz(luz);
@@ -43,40 +42,83 @@ public class CultivoServicio {
         cultivo.setEstacion(estacion);
         cultivo.setViento(viento);
         cultivo.setObservaciones(observaciones);
-        
+
         Foto foto = fotoServicio.guardar(archivo);
         cultivo.setImagenCultivo(foto);
-        
-       cultivoRepositorio.save(cultivo);
-        
+
+        cultivoRepositorio.save(cultivo);
+
     }
+
     @Transactional
-    public void modificarCultivo (String id,String nombre, String tipoCultivo, String temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo) throws MiExcepcion{
+    public void modificarCultivo(String id, String nombre, String tipoCultivo, String temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo) throws MiExcepcion {
         //vamos a hacer metodo validar?
         Optional<Cultivo> respuesta = cultivoRepositorio.findById(id);
-        if (respuesta.isPresent()){
+        if (respuesta.isPresent()) {
             Cultivo cultivo = respuesta.get();
-            
-        cultivo.setNombre(nombre);
-        cultivo.setTipoCultivo(tipoCultivo);
-        
-        cultivo.setFecha(new Date());
-        cultivo.setAlta(true);
-        cultivo.setTemperatura(temperatura);
-        cultivo.setAgua(agua);
-        cultivo.setLuz(luz);
-        cultivo.setSuelo(suelo);
-        cultivo.setEstacion(estacion);
-        cultivo.setViento(viento);
-        cultivo.setObservaciones(observaciones);
-        
-        Foto foto = fotoServicio.guardar(archivo);
-        cultivo.setImagenCultivo(foto);
-        
-       cultivoRepositorio.save(cultivo);
+
+            cultivo.setNombre(nombre);
+            cultivo.setTipoCultivo(tipoCultivo);
+            cultivo.setTemperatura(temperatura);
+            cultivo.setAgua(agua);
+            cultivo.setLuz(luz);
+            cultivo.setSuelo(suelo);
+            cultivo.setEstacion(estacion);
+            cultivo.setViento(viento);
+            cultivo.setObservaciones(observaciones);
+
+            Foto foto = fotoServicio.guardar(archivo);
+            cultivo.setImagenCultivo(foto);
+
+            cultivoRepositorio.save(cultivo);
         }
     }
 
+    @Transactional
+    public void eliminarCultivo(String id) {
+
+        Optional<Cultivo> respuesta = cultivoRepositorio.findById(id);
+        if (respuesta.isPresent()) {
+            Cultivo cultivo = respuesta.get();
+            cultivoRepositorio.delete(cultivo);
+        }
+    }
+
+    //en el video de spring agrega un metodo para listar todos los Cultivos (en este caso) que tiene la BD
+    //lo agregué para cumplir el CRUD (Read)
+    public List<Cultivo> listarCultivos() {
+        List<Cultivo> cultivos = new ArrayList();
+        cultivos = cultivoRepositorio.findAll();
+        return cultivos;
+    }
+
+    public List<Cultivo> listarVegetales() {
+        List<Cultivo> vegetales = new ArrayList();
+        vegetales = cultivoRepositorio.buscarPorTipoCultivo("Vegetales");
+        return vegetales;
+    }
+
+    public List<Cultivo> listarFrutas() {
+        List<Cultivo> frutas = new ArrayList();
+        frutas = cultivoRepositorio.buscarPorTipoCultivo("Frutas");
+        return frutas;
+    }
+
+    /*Metodo para leer 1 solo cultivo*/
+    @Transactional(readOnly = true)
+    public Cultivo getOne(String id) {
+        return cultivoRepositorio.getOne(id);
+    }
+    
+    /*método para "eliminar" sigue en la base de datos pero esta en el estado de BAJA*/
+    public void alta(String id) {
+
+        Cultivo entidad = cultivoRepositorio.getOne(id);
+
+        entidad.setAlta(true);
+        cultivoRepositorio.save(entidad);
+    }
+    
     /*método para "eliminar" sigue en la base de datos pero esta en el estado de BAJA*/
     public void baja(String id) {
 
@@ -85,37 +127,8 @@ public class CultivoServicio {
         entidad.setAlta(false);
         cultivoRepositorio.save(entidad);
     }
-    
-       /*método para "eliminar" sigue en la base de datos pero esta en el estado de BAJA*/
-    public void alta(String id) {
 
-        Cultivo entidad = cultivoRepositorio.getOne(id);
-
-        entidad.setAlta(true);
-        cultivoRepositorio.save(entidad);
-    }
-
-    
-    @Transactional
-    public void eliminarCultivo(String id){
-       
-         Optional<Cultivo> respuesta = cultivoRepositorio.findById(id);
-        if (respuesta.isPresent()){
-            Cultivo cultivo = respuesta.get();
-            cultivoRepositorio.delete(cultivo);
-    }
-    }
-    
-    //en el video de spring agrega un metodo para listar todos los Cultivos (en este caso) que tiene la BD
-    //lo agregué para cumplir el CRUD (Read)
-    public List<Cultivo> listarCultivos(){
-        List<Cultivo> cultivos=new ArrayList();
-        cultivos= cultivoRepositorio.findAll();
-        return cultivos;
-    }
-    
     //ver si agregamos validarCultivo para crear/modificar (llamar al validar en esos métodos)
-    
 //    private void validarCultivo(String id,String nombre, String tipoCultivo, Date fecha, boolean alta, 
 //            double temperatura, String agua, String luz, String suelo, String estacion, String viento, 
 //            String observaciones, MultipartFile archivo) throws MiExcepcion {
@@ -154,10 +167,4 @@ public class CultivoServicio {
 //        //observaciones podrían ser nulas/vacías
 //        
 //    }
-    /*Metodo para leer 1 solo cultivo*/
-    @Transactional(readOnly = true)
-	public Cultivo getOne(String id) {
-		return cultivoRepositorio.getOne(id);
-	}
-	
 }

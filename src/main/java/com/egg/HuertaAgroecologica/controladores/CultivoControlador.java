@@ -49,7 +49,7 @@ public class CultivoControlador {
     }
 
     @GetMapping("/modificar/{id}")
-    public String modificarAp(@PathVariable String id, ModelMap modelo) {
+    public String modificar(@PathVariable String id, ModelMap modelo) {
         Cultivo cultivo = cultivoServicio.getOne(id);
         modelo.put("cultivo", cultivo);
         return "cultivo-modificar.html";
