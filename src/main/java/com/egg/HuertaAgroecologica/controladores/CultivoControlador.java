@@ -47,6 +47,20 @@ public class CultivoControlador {
         modelo.addAttribute("cultivos", cultivos);
         return "cultivo-list.html";
     }
+    
+    @GetMapping("/frutas")
+    public String listarFrutas(ModelMap modelo) {
+        List<Cultivo> cultivos = cultivoServicio.listarFrutas();
+        modelo.addAttribute("cultivos", cultivos);
+        return "cultivo-list.html";
+    }
+    
+    @GetMapping("/verduras")
+    public String listarVerduras(ModelMap modelo) {
+        List<Cultivo> cultivos = cultivoServicio.listarVegetales();
+        modelo.addAttribute("cultivos", cultivos);
+        return "cultivo-list.html";
+    }
 
     @GetMapping("/modificar/{id}")
     public String modificar(@PathVariable String id, ModelMap modelo) {
@@ -59,10 +73,10 @@ public class CultivoControlador {
     @PostMapping("/modificar/{id}")
     public String modificar(@PathVariable String id, @RequestParam String nombre, @RequestParam String tipoCultivo,
             @RequestParam String temperatura, @RequestParam String agua, @RequestParam String luz,
-            @RequestParam String suelo, @RequestParam String estacion, String observaciones, @RequestParam MultipartFile archivo, ModelMap modelo) {
+            @RequestParam String suelo, @RequestParam String estacion, String observaciones, @RequestParam MultipartFile archivo, ModelMap modelo) throws Exception {
         try {
             cultivoServicio.modificarCultivo(id, nombre, tipoCultivo, temperatura, agua, luz, suelo, estacion, suelo, observaciones, archivo);
-            return "redirect:../cultivo-list";
+            return "redirect:../lista";
         } catch (MiExcepcion ex) {
             // TODO Auto-generated catch block
             modelo.put("error", "No se pudo editar");

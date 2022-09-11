@@ -29,7 +29,7 @@
 
         <div class="container">
             <header>Registro del cultivo</header>
-            <form th:action="@{/cultivo/modificar/__${lista.id}__}" method="POST" enctype="multipart/form-data">
+            <form th:action="@{/cultivo/modificar/__${cultivo.id}__}" method="POST" enctype="multipart/form-data">
                 <input type="hidden" th:value="${cultivo.id}" name="id">
                 <div class="form-first">
                     <div class="details-compound">

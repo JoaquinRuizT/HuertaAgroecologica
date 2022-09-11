@@ -12,8 +12,8 @@
 
     <body>
         <header th:replace="plantilla/template :: header">
-    
-  </header>
+
+        </header>
         <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError" >
             <div class="card-body">
                 <h5 class="card-title">Error!</h5>
@@ -30,7 +30,7 @@
         <div class="container">
             <header>Registro del cultivo</header>
             <form th:action="@{/cultivo/registro}" method="POST" enctype="multipart/form-data">
-                
+
                 <div class="form-first">
                     <div class="details-compound">
                         <span class="title">Detalles</span>
@@ -43,12 +43,11 @@
                             <div class="input-field">
                                 <label for="">Tipo de Cultivo</label>
                                 <select class="form-select" aria-label="Default select example" th:name="tipoCultivo" th:value="${tipoCultivo}">
-                        
-                        <option value="Frutas">Frutas</option>
-                        <option value="Vegetales">Vegetales</option>
-                        <option value="Arboles">Arboles</option>
-                        
-                      </select> 
+
+                                    <option value="Frutas">Frutas</option>
+                                    <option value="Vegetales">Vegetales</option>
+
+                                </select> 
                             </div>
 
                             <div class="input-field">
@@ -57,32 +56,40 @@
                             </div>
 
                             <div class="input-field">
-                                <label for="">Requerimiento de Agua (m3)</label>
-                                <input type="text" name="agua" class="form-control"  th:value="${agua}">
+                                <label for="">Requerimiento de Agua</label>
+                                <select class="form-select" aria-label="Default select example" th:name="agua" th:value="${agua}">
+                                    <option value="Alto">Alto</option>
+                                    <option value="Medio">Medio</option>
+                                    <option value="Bajo">Bajo</option>
+                                </select>
                             </div>
 
                             <div class="input-field">
-                                <label for="">Requerimiento de Luz (h)</label>
-                                <input type="text" name="luz" class="form-control" th:value="${luz}">
+                                <label for="">Requerimiento de Luz</label>
+                                <select class="form-select" aria-label="Default select example" th:name="luz" th:value="${luz}">
+                                    <option value="Alto">Alto</option>
+                                    <option value="Medio">Medio</option>
+                                    <option value="Bajo">Bajo</option>
+                                </select>
                             </div>
 
                             <div class="input-field">
-                                <label for="">Suelo (Ingresar pH del suelo)</label>
+                                <label for="">Tipo de suelo</label>
                                 <input type="text" name="suelo" class="form-control" th:value="${suelo}">
                             </div>
 
                             <div class="input-field">
                                 <label for="">Estación (Verano, Otoño, Invierno, Primavera)</label>
-                                 <select class="form-select" aria-label="Default select example" th:name="estacion" th:value="${estacion}">
-                        
-                        <option value="Invierno">Invierno</option>
-                        <option value="Otoño">Otoño</option>
-                        <option value="Primavera">Primavera</option>
-                        <option value="Verano">Verano</option>
-                      </select> 
+                                <select class="form-select" aria-label="Default select example" th:name="estacion" th:value="${estacion}">
+
+                                    <option value="Invierno">Invierno</option>
+                                    <option value="Otoño">Otoño</option>
+                                    <option value="Primavera">Primavera</option>
+                                    <option value="Verano">Verano</option>
+                                </select> 
                             </div>
 
-                           <div class="input-field">
+                            <div class="input-field">
                                 <label for="">Observaciones</label>
                                 <input type="text" name="observaciones" class="form-control" th:value="${observaciones}">
                             </div>

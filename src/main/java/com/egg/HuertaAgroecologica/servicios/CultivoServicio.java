@@ -42,6 +42,7 @@ public class CultivoServicio {
         cultivo.setEstacion(estacion);
         cultivo.setViento(viento);
         cultivo.setObservaciones(observaciones);
+        cultivo.setFecha(new Date());
 
         Foto foto = fotoServicio.guardar(archivo);
         cultivo.setImagenCultivo(foto);
@@ -51,7 +52,7 @@ public class CultivoServicio {
     }
 
     @Transactional
-    public void modificarCultivo(String id, String nombre, String tipoCultivo, String temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo) throws MiExcepcion {
+    public void modificarCultivo(String id, String nombre, String tipoCultivo, String temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo) throws MiExcepcion, Exception {
         //vamos a hacer metodo validar?
         Optional<Cultivo> respuesta = cultivoRepositorio.findById(id);
         if (respuesta.isPresent()) {
@@ -59,6 +60,7 @@ public class CultivoServicio {
 
             cultivo.setNombre(nombre);
             cultivo.setTipoCultivo(tipoCultivo);
+            cultivo.setAlta(true);
             cultivo.setTemperatura(temperatura);
             cultivo.setAgua(agua);
             cultivo.setLuz(luz);
@@ -66,8 +68,15 @@ public class CultivoServicio {
             cultivo.setEstacion(estacion);
             cultivo.setViento(viento);
             cultivo.setObservaciones(observaciones);
+            cultivo.setFecha(new Date());
+            
+            String idFoto = null;
+            
+            if(cultivo.getImagenCultivo() != null){
+                idFoto = cultivo.getImagenCultivo().getId();
+            }
 
-            Foto foto = fotoServicio.guardar(archivo);
+            Foto foto = fotoServicio.actualizar(idFoto, archivo);
             cultivo.setImagenCultivo(foto);
 
             cultivoRepositorio.save(cultivo);
@@ -109,7 +118,7 @@ public class CultivoServicio {
     public Cultivo getOne(String id) {
         return cultivoRepositorio.getOne(id);
     }
-    
+
     /*método para "eliminar" sigue en la base de datos pero esta en el estado de BAJA*/
     public void alta(String id) {
 
@@ -118,7 +127,7 @@ public class CultivoServicio {
         entidad.setAlta(true);
         cultivoRepositorio.save(entidad);
     }
-    
+
     /*método para "eliminar" sigue en la base de datos pero esta en el estado de BAJA*/
     public void baja(String id) {
 
