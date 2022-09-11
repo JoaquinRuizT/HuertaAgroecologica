@@ -1,4 +1,3 @@
-
 package com.egg.HuertaAgroecologica.servicios;
 
 import com.egg.HuertaAgroecologica.entidades.Cultivo;
@@ -20,18 +19,18 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Service
 public class CultivoServicio {
-    
+
     @Autowired
     private CultivoRepositorio cultivoRepositorio;
-  
+
     @Autowired
     private FotoServicio fotoServicio;
-    
+
     @Transactional
-    public void crearCultivo(String nombre, String tipoCultivo, Date fecha, boolean alta, double temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo) throws MiExcepcion{
+    public void crearCultivo(String nombre, String tipoCultivo, Date fecha, boolean alta, double temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo) throws MiExcepcion {
         //vamos a hacer metodo validar?
-        Cultivo cultivo= new Cultivo();
-        
+        Cultivo cultivo = new Cultivo();
+
         cultivo.setNombre(nombre);
         cultivo.setTipoCultivo(tipoCultivo);
         cultivo.setFecha(fecha);
@@ -43,59 +42,83 @@ public class CultivoServicio {
         cultivo.setEstacion(estacion);
         cultivo.setViento(viento);
         cultivo.setObservaciones(observaciones);
-        
+
         Foto foto = fotoServicio.guardar(archivo);
         cultivo.setImagenCultivo(foto);
-        
-       cultivoRepositorio.save(cultivo);
-        
+
+        cultivoRepositorio.save(cultivo);
+
     }
+
     @Transactional
-    public void modificarCultivo (String id,String nombre, String tipoCultivo, Date fecha, boolean alta, double temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo) throws MiExcepcion{
+    public void modificarCultivo(String id, String nombre, String tipoCultivo, Date fecha, boolean alta, double temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo) throws MiExcepcion {
         //vamos a hacer metodo validar?
         Optional<Cultivo> respuesta = cultivoRepositorio.findById(id);
-        if (respuesta.isPresent()){
+        if (respuesta.isPresent()) {
             Cultivo cultivo = respuesta.get();
-            
-        cultivo.setNombre(nombre);
-        cultivo.setTipoCultivo(tipoCultivo);
-        cultivo.setFecha(fecha);
-        cultivo.setAlta(alta);
-        cultivo.setTemperatura(temperatura);
-        cultivo.setAgua(agua);
-        cultivo.setLuz(luz);
-        cultivo.setSuelo(suelo);
-        cultivo.setEstacion(estacion);
-        cultivo.setViento(viento);
-        cultivo.setObservaciones(observaciones);
-        
-        Foto foto = fotoServicio.guardar(archivo);
-        cultivo.setImagenCultivo(foto);
-        
-       cultivoRepositorio.save(cultivo);
+
+            cultivo.setNombre(nombre);
+            cultivo.setTipoCultivo(tipoCultivo);
+            cultivo.setFecha(fecha);
+            cultivo.setAlta(alta);
+            cultivo.setTemperatura(temperatura);
+            cultivo.setAgua(agua);
+            cultivo.setLuz(luz);
+            cultivo.setSuelo(suelo);
+            cultivo.setEstacion(estacion);
+            cultivo.setViento(viento);
+            cultivo.setObservaciones(observaciones);
+
+            Foto foto = fotoServicio.guardar(archivo);
+            cultivo.setImagenCultivo(foto);
+
+            cultivoRepositorio.save(cultivo);
         }
     }
-    
+
     @Transactional
-    public void eliminarCultivo(String id){
-       
-         Optional<Cultivo> respuesta = cultivoRepositorio.findById(id);
-        if (respuesta.isPresent()){
+    public void eliminarCultivo(String id) {
+
+        Optional<Cultivo> respuesta = cultivoRepositorio.findById(id);
+        if (respuesta.isPresent()) {
             Cultivo cultivo = respuesta.get();
             cultivoRepositorio.delete(cultivo);
+        }
     }
-    }
-    
+
     //en el video de spring agrega un metodo para listar todos los Cultivos (en este caso) que tiene la BD
     //lo agregué para cumplir el CRUD (Read)
-    public List<Cultivo> listarCultivos(){
-        List<Cultivo> cultivos=new ArrayList();
-        cultivos= cultivoRepositorio.findAll();
+    public List<Cultivo> listarCultivos() {
+        List<Cultivo> cultivos = new ArrayList();
+        cultivos = cultivoRepositorio.findAll();
         return cultivos;
     }
-    
+
+    public List<Cultivo> listarVegetales() {
+        List<Cultivo> cultivos = new ArrayList();
+        cultivos = cultivoRepositorio.findAll();
+        List<Cultivo> vegetales = new ArrayList();
+        for (Cultivo cultivo : cultivos) {
+            if (cultivo.getTipoCultivo().equalsIgnoreCase("vegetal")) {
+                vegetales.add(cultivo);
+            }
+        }
+        return vegetales;
+    }
+
+    public List<Cultivo> listarFrutas() {
+        List<Cultivo> cultivos = new ArrayList();
+        cultivos = cultivoRepositorio.findAll();
+        List<Cultivo> frutas = new ArrayList();
+        for (Cultivo cultivo : cultivos) {
+            if (cultivo.getTipoCultivo().equalsIgnoreCase("fruta")) {
+                frutas.add(cultivo);
+            }
+        }
+        return frutas;
+    }
+
     //ver si agregamos validarCultivo para crear/modificar (llamar al validar en esos métodos)
-    
 //    private void validarCultivo(String id,String nombre, String tipoCultivo, Date fecha, boolean alta, 
 //            double temperatura, String agua, String luz, String suelo, String estacion, String viento, 
 //            String observaciones, MultipartFile archivo) throws MiExcepcion {
