@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,13 +28,12 @@ public class CultivoServicio {
     private FotoServicio fotoServicio;
 
     @Transactional
-    public void crearCultivo(String nombre, String tipoCultivo, Date fecha, String temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo) throws MiExcepcion {
-        //vamos a hacer metodo validar?
+    public void crearCultivo(String nombre, String tipoCultivo, boolean alta, String temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo) throws MiExcepcion {
+//vamos a hacer metodo validar?
         Cultivo cultivo = new Cultivo();
 
         cultivo.setNombre(nombre);
         cultivo.setTipoCultivo(tipoCultivo);
-        cultivo.setFecha(fecha);
         cultivo.setAlta(true);
         cultivo.setTemperatura(temperatura);
         cultivo.setAgua(agua);
@@ -94,13 +94,13 @@ public class CultivoServicio {
 
     public List<Cultivo> listarVegetales() {
         List<Cultivo> vegetales = new ArrayList();
-        vegetales = cultivoRepositorio.buscarPorTipoCultivo("Vegetales");        
+        vegetales = cultivoRepositorio.buscarPorTipoCultivo("Vegetales");
         return vegetales;
     }
 
     public List<Cultivo> listarFrutas() {
         List<Cultivo> frutas = new ArrayList();
-        frutas = cultivoRepositorio.buscarPorTipoCultivo("Frutas");        
+        frutas = cultivoRepositorio.buscarPorTipoCultivo("Frutas");
         return frutas;
     }
 
