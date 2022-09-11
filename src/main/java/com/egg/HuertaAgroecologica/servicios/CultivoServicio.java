@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -27,14 +27,14 @@ public class CultivoServicio {
     private FotoServicio fotoServicio;
 
     @Transactional
-    public void crearCultivo(String nombre, String tipoCultivo, Date fecha, boolean alta, double temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo) throws MiExcepcion {
+    public void crearCultivo(String nombre, String tipoCultivo, Date fecha, String temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo) throws MiExcepcion {
         //vamos a hacer metodo validar?
         Cultivo cultivo = new Cultivo();
 
         cultivo.setNombre(nombre);
         cultivo.setTipoCultivo(tipoCultivo);
         cultivo.setFecha(fecha);
-        cultivo.setAlta(alta);
+        cultivo.setAlta(true);
         cultivo.setTemperatura(temperatura);
         cultivo.setAgua(agua);
         cultivo.setLuz(luz);
@@ -51,7 +51,7 @@ public class CultivoServicio {
     }
 
     @Transactional
-    public void modificarCultivo(String id, String nombre, String tipoCultivo, Date fecha, boolean alta, double temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo) throws MiExcepcion {
+    public void modificarCultivo(String id, String nombre, String tipoCultivo, String temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo) throws MiExcepcion {
         //vamos a hacer metodo validar?
         Optional<Cultivo> respuesta = cultivoRepositorio.findById(id);
         if (respuesta.isPresent()) {
@@ -59,8 +59,6 @@ public class CultivoServicio {
 
             cultivo.setNombre(nombre);
             cultivo.setTipoCultivo(tipoCultivo);
-            cultivo.setFecha(fecha);
-            cultivo.setAlta(alta);
             cultivo.setTemperatura(temperatura);
             cultivo.setAgua(agua);
             cultivo.setLuz(luz);
@@ -95,26 +93,14 @@ public class CultivoServicio {
     }
 
     public List<Cultivo> listarVegetales() {
-        List<Cultivo> cultivos = new ArrayList();
-        cultivos = cultivoRepositorio.findAll();
         List<Cultivo> vegetales = new ArrayList();
-        for (Cultivo cultivo : cultivos) {
-            if (cultivo.getTipoCultivo().equalsIgnoreCase("vegetal")) {
-                vegetales.add(cultivo);
-            }
-        }
+        vegetales = cultivoRepositorio.buscarPorTipoCultivo("Vegetales");        
         return vegetales;
     }
 
     public List<Cultivo> listarFrutas() {
-        List<Cultivo> cultivos = new ArrayList();
-        cultivos = cultivoRepositorio.findAll();
         List<Cultivo> frutas = new ArrayList();
-        for (Cultivo cultivo : cultivos) {
-            if (cultivo.getTipoCultivo().equalsIgnoreCase("fruta")) {
-                frutas.add(cultivo);
-            }
-        }
+        frutas = cultivoRepositorio.buscarPorTipoCultivo("Frutas");        
         return frutas;
     }
 
