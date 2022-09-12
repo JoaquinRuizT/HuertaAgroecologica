@@ -30,6 +30,7 @@
                         <th scope="col">Luz</th>
                         <th scope="col">Suelo (pH)</th>
                         <th scope="col">Estación</th>
+                        <th scope="col">Observaciones</th>
                         <th scope="col">Foto</th>
                         <th scope="col">Estado</th>
                         <th scope="col">Acción</th>
@@ -45,6 +46,7 @@
                         <th th:text="${cultivo.luz}"></th>
                         <th th:text="${cultivo.suelo}"></th>
                         <th th:text="${cultivo.estacion}"></th>
+                        <th th:text="${cultivo.observaciones}"></th>
                         <th><img th:src="@{/foto/fotografias/__${cultivo.imagenCultivo.id}__}"></img></th>
                         <td>
                             <i th:if="${cultivo.alta}" class="fa fa-circle text-success"></i>
