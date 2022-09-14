@@ -46,7 +46,6 @@
                         
                         <option value="Frutas">Frutas</option>
                         <option value="Vegetales">Vegetales</option>
-                        <option value="Arboles">Arboles</option>
                         
                       </select> 
                             </div>
@@ -57,13 +56,21 @@
                             </div>
 
                             <div class="input-field">
-                                <label for="">Requerimiento de Agua (m3)</label>
-                                <input type="text" name="agua" class="form-control"  th:value="${agua}">
+                                <label for="">Requerimiento de Agua</label>
+                                <select class="form-select" aria-label="Default select example" th:name="agua" th:value="${agua}">
+                                    <option value="Alto">Alto</option>
+                                    <option value="Medio">Medio</option>
+                                    <option value="Bajo">Bajo</option>
+                                </select>
                             </div>
 
                             <div class="input-field">
-                                <label for="">Requerimiento de Luz (h)</label>
-                                <input type="text" name="luz" class="form-control" th:value="${luz}">
+                                <label for="">Requerimiento de Luz</label>
+                                <select class="form-select" aria-label="Default select example" th:name="luz" th:value="${luz}">
+                                    <option value="Alto">Alto</option>
+                                    <option value="Medio">Medio</option>
+                                    <option value="Bajo">Bajo</option>
+                                </select>
                             </div>
 
                             <div class="input-field">
