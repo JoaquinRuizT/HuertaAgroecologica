@@ -59,3 +59,7 @@ body, html {
   .btn:hover {
     opacity: 1;
   }
+  
+  .container {
+    margin-top: 10px;
+  }
