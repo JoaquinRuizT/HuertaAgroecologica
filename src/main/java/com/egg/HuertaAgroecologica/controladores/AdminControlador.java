@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/admin")
 public class AdminControlador {
-    //ver dashboard porque no existe aun o reemplazar por otro
+    
    
     @GetMapping("/dashboard")
    public String panelAdministrativo(){
