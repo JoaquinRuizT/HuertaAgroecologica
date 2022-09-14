@@ -36,19 +36,19 @@ public class SeguridadWeb extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
            .authorizeRequests()
-               // .antMatchers("/admin/*").hasRole("ADMIN")
+                .antMatchers("/admin/*").hasRole("ADMIN")
                 .antMatchers("/css/*", "/js/*", "/img/*", "/**")
                 .permitAll()
             .and().formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/logincheck")
+                .loginPage("/login")//esto indica cual es la url donde se va a encontrar nuestro formulario de login
+                .loginProcessingUrl("/logincheck")//es la url con la cual autentica y procesa nuestro inicio de sesion, debe coinicdir con el action del formulario de logueo
                 .usernameParameter("email")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/inicio")
+                .defaultSuccessUrl("/inicio")//si genera un login corrrecto
                 .permitAll()
-        .and().logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/login")
+        .and().logout()//salida del sistema
+                .logoutUrl("/logout")//cuando se cierra
+                .logoutSuccessUrl("/login")//va a la url de login 
                 .permitAll()
         .and().csrf()
                 .disable();
