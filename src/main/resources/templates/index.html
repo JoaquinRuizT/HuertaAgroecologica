@@ -52,12 +52,24 @@
         </div>
       </div>
       <div class="col-lg-3">
+          
         <div class="card">
           <img src="/img/negocio.svg" alt="logo" class="card-img-top">
           <div class="card-body">
             <h5>Comercialización</h5>
             <p class="card-text">Visualice la data de sus productos y oportunidades de negocio</p>
-            <a href="#" class="btn btn-success">Estadisticas</a>
+            <a th:href="@{/produccion/registrar(id=)}" class="btn btn-success">Ingresar</a>
+            <a th:href="@{/produccion/lista}" class="btn btn-info">Lista</a>
+          </div>
+        </div>
+      </div>
+        <div class="col-lg-3">
+        <div class="card">
+          <img src="/img/datos.png" alt="logo" class="card-img-top">
+          <div class="card-body">
+            <h5>Estadisticas</h5>
+            <p class="card-text">Estadisticas de Producción</p>
+            <a th:href="@{graficos/display}" class="btn btn-success">Mostrar</a>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -13,31 +13,37 @@
 <body>
     <header>
         <div class="topnav">
-            <a class="active" href="#home">Home</a>
+            <a class="active" th:href="@{/inicio}">Home</a>
             <a href="#new">New</a>
             <a href="#contact">Contact</a>
             <a href="#about">About</a>
         </div>
     </header>
     <div class="container">
-        <header>Vegetales</header>
+        <header>Producción Mensual de cultivos</header>
         <form action="">
             <div class="form-first">
                 <div class="details-compound">
-                    <span class="title">Statistics</span>
+                    <span class="title">Estadisticas</span>
                     <div class="chart">
                         <div id="chart"></div>
                     </div>
 
                 </div>
                 <div class="details-compound">
-                    <span class="title">Statistics</span>
+                    <span class="title">Estadisticas</span>
                     <div class="chart2">
                         <div id="chart2"></div>
                     </div>
 
                 </div>
-                
+                <div class="details-compound">
+                    <span class="title">Porcentaje de Cultivos</span>
+                    <div class="chart3">
+                        <div id="chart3"></div>
+                    </div>
+
+                </div>
 
             </div>
             <br>
@@ -60,7 +66,119 @@
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-        <script type="text/javascript" src="/js/script.js"></script>
+        <script type="text/javascript" th:inline="javascript">
+        var options = {
+        		  series: [
+        		    {
+        		      name: "Cantidad (kg)",
+        		      data: /*[[${listaCantidad}]]*/[],
+        		    },
+        		    
+        		  ],
+        		  chart: {
+        		    type: "bar",
+        		    height: 350,
+        		  },
+        		  plotOptions: {
+        		    bar: {
+        		      horizontal: false,
+        		      columnWidth: "55%",
+        		      endingShape: "rounded",
+        		    },
+        		  },
+        		  dataLabels: {
+        		    enabled: false,
+        		  },
+        		  stroke: {
+        		    show: true,
+        		    width: 2,
+        		    colors: ["transparent"],
+        		  },
+        		  xaxis: {
+        		    categories: /*[[${listaNombres}]]*/[],
+        		  },
+        		  yaxis: {
+        		    title: {
+        		      text: " ( kg )",
+        		    },
+        		  },
+        		  fill: {
+        		    opacity: 1,
+        		  },
+        		  tooltip: {
+        		    y: {
+        		      formatter: function (val) {
+        		        return " " + val + " kg";
+        		      },
+        		    },
+        		  },
+        		};
+
+        		var chart = new ApexCharts(document.querySelector("#chart"), options);
+        		chart.render();
+        </script>
+         <script type="text/javascript" th:inline="javascript">
+        var options2 = {
+  series: [{
+    name: "Producción",
+    data: /*[[${listaCantidad}]]*/[],
+}],
+  chart: {
+  height: 350,
+  type: 'line',
+  zoom: {
+    enabled: false
+  }
+},
+dataLabels: {
+  enabled: false
+},
+stroke: {
+  curve: 'straight'
+},
+title: {
+  text: 'Producción de Tomate en la huerta',
+  align: 'left'
+},
+grid: {
+  row: {
+    colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+    opacity: 0.5
+  },
+},
+xaxis: {
+  categories: /*[[${listaMeses}]]*/[],
+}
+};
+
+        		var chart2 = new ApexCharts(document.querySelector("#chart2"), options2);
+        		chart2.render();
+        </script>
+        <script type="text/javascript" th:inline="javascript">
+         var options3 = {
+          series: /*[[${vectorPorcentajes}]]*/[],
+          chart: {
+          width: 380,
+          type: 'pie',
+        },
+        labels: ['Frutas', 'Vegetales'],
+        responsive: [{
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }]
+        };
+
+        var chart3 = new ApexCharts(document.querySelector("#chart3"), options3);
+        chart3.render();
+        </script>
+        
 </body>
 
 </html>
