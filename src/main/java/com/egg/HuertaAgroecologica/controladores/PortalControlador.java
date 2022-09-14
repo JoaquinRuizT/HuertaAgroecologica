@@ -73,8 +73,15 @@ public class PortalControlador { //localhost:8080/??
     public String index() {
         return "index.html";
     }    
+    @GetMapping("/login")
+    public String login(@RequestParam(required=false)String error, ModelMap modelo) {
+        if (error !=null){
+            modelo.put("error", "Usuario o contraseña incorrecta");
+        }
+        return "login.html";
+    }
     
-//    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+//    @PreAuthorize("hasAnyRole('ROLE_GUEST', 'ROLE_ADMIN')")
 //    @GetMapping("/inicio")
 //    public String inicio(HttpSession session) {
 //        
