@@ -69,22 +69,29 @@ public class PortalControlador { //localhost:8080/??
         }
     }
     
-    @GetMapping("/inicio")
-    public String index() {
-        return "index.html";
-    }    
-    
-//    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
 //    @GetMapping("/inicio")
-//    public String inicio(HttpSession session) {
-//        
-//        Usuario logueado = (Usuario) session.getAttribute("usuariosession");
-//        
-//        if (logueado.getRol().toString().equals("ADMIN")) {
-//            return "redirect:/admin/dashboard";
-//        }
-//        
-//           return "index.html";
-//    }
+//    public String index() {
+//        return "index.html";
+//    }    
+    @GetMapping("/login")
+    public String login(@RequestParam(required=false) String error, ModelMap modelo) {
+        if (error != null){
+            modelo.put("error", "Usuario o contraseña incorrecta");
+        }
+        return "login.html";
+    }
+    
+    @PreAuthorize("hasAnyRole('ROLE_GUEST', 'ROLE_ADMIN')")
+    @GetMapping("/inicio")
+    public String inicio(HttpSession session) {
+        
+       Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+        
+        if (logueado.getRol().toString().equals("ADMIN")) {
+            return "redirect:/admin/dashboard";
+       }
+        
+           return "index.html";
+    }
 //    
 }
