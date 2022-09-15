@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
   <meta charset="utf-8">
@@ -11,61 +11,32 @@
 </head>
 
 <body>
-  <header th:replace="plantilla/template :: header">
-    
+  <header th:fragment="header">
+    <div class="topnav">
+      <a class="active" th:href="@{/inicio}">Inicio</a>
+      <a href="#new">Noticias</a>
+      <a href="#contact">Contacto</a>
+      <a href="#about">Nosotros</a>
+      <a href="/logout">Cerrar Sesion</a>
+
+    </div>
   </header>
-  <div class="contenedor">
+    
+    <!-- Main -->
+    <div class="container">
+        
+        <div class="contenedor">
     <img src="/img/portada.png" alt="">
   </div>
   <div class="container mt-5">
-    <div class="row">
-
-      <div class="col-lg-3">
-        <div class="card">
-          <img src="/img/cultivos.png" alt="logo" class="card-img-top">
-          <div class="card-body">
-            <h5>Registro de Cultivos</h5>
-            <p class="card-text">Vegetales, Frutas y/o Arboles</p>
-            <a href="#" class="btn btn-success">Ingresar</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3">
-        <div class="card">
-          <img src="/img/frutas.png" alt="logo" class="card-img-top">
-          <div class="card-body">
-            <h5>Frutas</h5>
-            <p class="card-text">Lista de Frutas disponibles</p>
-            <a href="#" class="btn btn-success">Lista</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3">
-        <div class="card">
-          <img src="/img/vegetales.png" alt="logo" class="card-img-top">
-          <div class="card-body">
-            <h5>Vegetales</h5>
-            <p class="card-text">Lista de Vegetales disponibles</p>
-            <a href="#" class="btn btn-success">Lista</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3">
-        <div class="card">
-          <img src="/img/negocio.svg" alt="logo" class="card-img-top">
-          <div class="card-body">
-            <h5>Comercialización</h5>
-            <p class="card-text">Visualice la data de sus productos y oportunidades de negocio</p>
-            <a href="#" class="btn btn-success">Estadisticas</a>
-          </div>
-        </div>
-      </div>
+    
+        
     </div>
-  </div>
+  
 
   
   <!--Footer-->
-  <div class="container">
+  <div th:fragment="footer" class="container">
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
       <p class="col-md-4 mb-0 text-muted">&copy; 2022 Company, Inc</p>
 
@@ -98,3 +69,4 @@
 </body>
 
 </html>
+
