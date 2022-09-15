@@ -37,12 +37,12 @@
                         <div class="fields">
                             <div class="input-field">
                                 <label for="">Nombre</label>
-                                <input type="text" name="nombre" class="form-control" th:value="${nombre}">
+                                <input type="text" name="nombre" class="form-control" th:value="${cultivo.nombre}">
                             </div>
 
                             <div class="input-field">
                                 <label for="">Tipo de Cultivo</label>
-                                <select class="form-select" aria-label="Default select example" th:name="tipoCultivo" th:value="${tipoCultivo}">
+                                <select class="form-select" aria-label="Default select example" th:name="tipoCultivo" th:value="${cultivo.tipoCultivo}">
                         
                         <option value="Frutas">Frutas</option>
                         <option value="Vegetales">Vegetales</option>
@@ -52,12 +52,12 @@
 
                             <div class="input-field">
                                 <label for="">Temperatura (°C)</label>
-                                <input type="text" name="temperatura" class="form-control" th:value="${temperatura}">
+                                <input type="text" name="temperatura" class="form-control" th:value="${cultivo.temperatura}">
                             </div>
 
                             <div class="input-field">
                                 <label for="">Requerimiento de Agua</label>
-                                <select class="form-select" aria-label="Default select example" th:name="agua" th:value="${agua}">
+                                <select class="form-select" aria-label="Default select example" th:name="agua" th:value="${cultivo.agua}">
                                     <option value="Alto">Alto</option>
                                     <option value="Medio">Medio</option>
                                     <option value="Bajo">Bajo</option>
@@ -66,7 +66,7 @@
 
                             <div class="input-field">
                                 <label for="">Requerimiento de Luz</label>
-                                <select class="form-select" aria-label="Default select example" th:name="luz" th:value="${luz}">
+                                <select class="form-select" aria-label="Default select example" th:name="luz" th:value="${cultivo.luz}">
                                     <option value="Alto">Alto</option>
                                     <option value="Medio">Medio</option>
                                     <option value="Bajo">Bajo</option>
@@ -75,12 +75,12 @@
 
                             <div class="input-field">
                                 <label for="">Suelo (Ingresar pH del suelo)</label>
-                                <input type="text" name="suelo" class="form-control" th:value="${suelo}">
+                                <input type="text" name="suelo" class="form-control" th:value="${cultivo.suelo}">
                             </div>
 
                             <div class="input-field">
                                 <label for="">Estación (Verano, Otoño, Invierno, Primavera)</label>
-                                 <select class="form-select" aria-label="Default select example" th:name="estacion" th:value="${estacion}">
+                                 <select class="form-select" aria-label="Default select example" th:name="estacion" th:value="${cultivo.estacion}">
                         
                         <option value="Invierno">Invierno</option>
                         <option value="Otoño">Otoño</option>
@@ -91,7 +91,7 @@
 
                            <div class="input-field">
                                 <label for="">Observaciones</label>
-                                <input type="text" name="observaciones" class="form-control" th:value="${observaciones}">
+                                <input type="text" name="observaciones" class="form-control" th:value="${cultivo.observaciones}">
                             </div>
 
 
