@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
     <head>
         <meta charset="utf-8">
@@ -118,7 +118,7 @@
 
 
             </form>
-            <a th:href="@{/}" class="btn btn-primary">Volver</a>
+            <a th:href="@{/inicio}" class="btn btn-primary">Volver</a>
 
         </div>
         <div th:if="${exito}!=null" class="card text-white bg-success mb-3">

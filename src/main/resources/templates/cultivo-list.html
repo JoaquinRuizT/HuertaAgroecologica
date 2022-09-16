@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,7 +33,7 @@
                         <th scope="col">Observaciones</th>
                         <th scope="col">Foto</th>
                         <th scope="col">Estado</th>
-                        <th scope="col">Acción</th>
+                        <th scope="col" sec:authorize="hasRole('ADMIN')">Acción</th>
 
                     </tr>
                 </thead>
@@ -53,9 +53,9 @@
                             <i th:unless="${cultivo.alta}" class="fa fa-circle" style="color:red;"></i>
                         </td>
                         <td>
-                            <a th:href="@{/cultivo/modificar/__${cultivo.id}__}" class="btn btn-warning">Modificar</a>
-                            <a th:href="@{/cultivo/alta/__${cultivo.id}__}"><i class="fa fa-arrow-up"></i></a> 
-                            <a th:href="@{/cultivo/baja/__${cultivo.id}__}"><i class="fa fa-ban"></i></a>
+                            <a th:href="@{/cultivo/modificar/__${cultivo.id}__}" class="btn btn-warning" sec:authorize="hasRole('ADMIN')" >Modificar</a>
+                            <a th:href="@{/cultivo/alta/__${cultivo.id}__}" sec:authorize="hasRole('ADMIN')"><i class="fa fa-arrow-up"></i></a> 
+                            <a th:href="@{/cultivo/baja/__${cultivo.id}__}" sec:authorize="hasRole('ADMIN')"><i class="fa fa-ban"></i></a>
                         </td>
                     </tr>
 
