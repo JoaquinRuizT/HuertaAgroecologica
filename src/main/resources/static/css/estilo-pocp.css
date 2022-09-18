@@ -162,5 +162,7 @@ form .fields .input-field {
    width: auto;
    padding-right: 40px;
 }
-
+img{
+    max-width: 120px ;
+}
 
