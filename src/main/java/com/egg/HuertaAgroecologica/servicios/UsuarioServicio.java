@@ -111,6 +111,15 @@ public class UsuarioServicio implements UserDetailsService {
         usuarios= usuarioRepositorio.findAll();
         return usuarios;
     }
+    
+    public Usuario buscarPorId(String id){
+        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
+        if (respuesta.isPresent()) {
+            Usuario usuario = respuesta.get();
+            return usuario;
+        }
+        return null;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
