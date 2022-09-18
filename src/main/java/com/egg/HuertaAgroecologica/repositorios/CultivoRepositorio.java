@@ -19,4 +19,7 @@ public interface CultivoRepositorio extends JpaRepository<Cultivo, String>{
     @Query("SELECT c FROM Cultivo c WHERE c.estacion = :estacion")
     public List<Cultivo> buscarPorTipoEstacion(@Param("estacion") String estacion);
     
+    @Query("SELECT c FROM Cultivo c WHERE c.usuario.id = :id")
+    public List<Cultivo> buscarCultivoPorUsuario(@Param("id") String usuarioId);
+    
 }

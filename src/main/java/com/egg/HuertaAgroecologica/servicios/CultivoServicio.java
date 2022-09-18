@@ -2,6 +2,7 @@ package com.egg.HuertaAgroecologica.servicios;
 
 import com.egg.HuertaAgroecologica.entidades.Cultivo;
 import com.egg.HuertaAgroecologica.entidades.Foto;
+import com.egg.HuertaAgroecologica.entidades.Usuario;
 import com.egg.HuertaAgroecologica.excepciones.MiExcepcion;
 import com.egg.HuertaAgroecologica.repositorios.CultivoRepositorio;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class CultivoServicio {
     private FotoServicio fotoServicio;
 
     @Transactional
-    public void crearCultivo(String nombre, String tipoCultivo, boolean alta, String temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo) throws MiExcepcion {
+    public void crearCultivo(String nombre, String tipoCultivo, boolean alta, String temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo, Usuario usuario) throws MiExcepcion {
 //vamos a hacer metodo validar?
         Cultivo cultivo = new Cultivo();
 
@@ -43,6 +44,7 @@ public class CultivoServicio {
         cultivo.setViento(viento);
         cultivo.setObservaciones(observaciones);
         cultivo.setFecha(new Date());
+        cultivo.setUsuario(usuario);
 
         Foto foto = fotoServicio.guardar(archivo);
         cultivo.setImagenCultivo(foto);
@@ -128,6 +130,12 @@ public class CultivoServicio {
         cultivoRepositorio.save(entidad);
     }
 
+    public List<Cultivo> buscarCultivosPorUsuario(String idUsuario){
+        List<Cultivo> cultivos = new ArrayList();
+        cultivos = cultivoRepositorio.buscarCultivoPorUsuario(idUsuario);
+        return cultivos;
+    }
+    
     /*método para "eliminar" sigue en la base de datos pero esta en el estado de BAJA*/
     public void baja(String id) {
 
