@@ -16,7 +16,7 @@
         <div class="bg-img">
             <form class="formulario" th:action="@{/logincheck}" method="POST">
 
-                <h1>Ingresa a la plataforma!</h1>
+                <h3>Ingresa a la plataforma!</h3>
 
                 <label for="email"><b>Email</b></label>
                 <input type="text" placeholder="Enter Email" name="email" required>
@@ -25,6 +25,9 @@
                 <input type="password" placeholder="Enter Password" name="password" required>
 
                 <button type="submit" class="btn">Ingresar</button>
+                
+               
+               
 
                 <div class="container">
                     <div th:if="${error!=null}" class="card text-white bg-danger mb-3">
@@ -41,8 +44,15 @@
                         </div>
                     </div>
                 </div>
+                
+                <h6>¿Aún no estás registrado?</h6>
+                
+                <a th:href="@{/registrar}" class="btn">Registrate</a>
+                
+                
 
             </form>
+            
         </div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
