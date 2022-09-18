@@ -137,7 +137,7 @@ stroke: {
   curve: 'straight'
 },
 title: {
-  text: 'Producción de Tomate en la huerta',
+  text: 'Producción de mensual en la huerta',
   align: 'left'
 },
 grid: {
@@ -148,11 +148,16 @@ grid: {
 },
 xaxis: {
   categories: /*[[${listaMeses}]]*/[],
-}
+},
+yaxis: {
+        		    title: {
+        		      text: " ( kg )",
+        		    },
+        		  }
 };
 
-        		var chart2 = new ApexCharts(document.querySelector("#chart2"), options2);
-        		chart2.render();
+var chart2 = new ApexCharts(document.querySelector("#chart2"), options2);
+chart2.render();
         </script>
         <script type="text/javascript" th:inline="javascript">
          var options3 = {

@@ -48,10 +48,10 @@ public class ProduccionControlador {
         try {
             produccionServicio.crearProduccion(cantidad, mes, year, idCultivo);
             modelo.put("exito", "Se ha registrado la producción correctamente");
-            return "index";
+            return "error-produccion.html";
         } catch (MiExcepcion ex) {
             modelo.put("error", "No se ha podido registrar correctamente");
-            return "form-produccion.html";
+            return "error-produccion.html";
         }
     }
     
