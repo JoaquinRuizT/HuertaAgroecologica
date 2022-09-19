@@ -57,7 +57,7 @@ public class PortalControlador { //localhost:8080/??
             usuarioServicio.registrar(archivo, nombre, email, password, password2);
 
             modelo.put("exito", "Usuario registrado correctamente!");
-
+            
             return "login.html";
         } catch (MiExcepcion e) {
             modelo.put("error", e.getMessage());
@@ -92,5 +92,5 @@ public class PortalControlador { //localhost:8080/??
 
         return "index.html";
     }
-//    
+    
 }
