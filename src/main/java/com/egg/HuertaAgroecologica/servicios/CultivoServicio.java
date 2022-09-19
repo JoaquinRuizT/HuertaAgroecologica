@@ -35,7 +35,7 @@ public class CultivoServicio {
 
         cultivo.setNombre(nombre);
         cultivo.setTipoCultivo(tipoCultivo);
-        cultivo.setAlta(true);
+        cultivo.setAlta(false);
         cultivo.setTemperatura(temperatura);
         cultivo.setAgua(agua);
         cultivo.setLuz(luz);

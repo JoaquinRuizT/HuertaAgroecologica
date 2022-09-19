@@ -6,6 +6,7 @@ import com.egg.HuertaAgroecologica.enumeraciones.Rol;
 import com.egg.HuertaAgroecologica.excepciones.MiExcepcion;
 import com.egg.HuertaAgroecologica.repositorios.UsuarioRepositorio;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpSession;
@@ -41,8 +42,8 @@ public class UsuarioServicio implements UserDetailsService {
 
         usuario.setNombre(nombre);
         usuario.setEmail(email);
-
-        //FALTA SETEAR PASSWORD (SPRING SECURITY)
+        usuario.setActivo(true);
+        usuario.setCreado(new Date());
         usuario.setPassword(new BCryptPasswordEncoder().encode(password));
 
         usuario.setRol(Rol.GUEST);
@@ -79,6 +80,7 @@ public class UsuarioServicio implements UserDetailsService {
             usuario.setEmail(email);
             usuario.setNombre(nombre);
             usuario.setPassword(password);
+            usuario.setEditado(new Date());
             //usuario.getRol();
             usuarioRepositorio.save(usuario);
         }
@@ -139,6 +141,20 @@ public class UsuarioServicio implements UserDetailsService {
         } else {
             return null;
         }
+    }
+    
+    @Transactional
+    public Usuario alta(String id) throws Exception {
+        Usuario entidadUsuario = usuarioRepositorio.getOne(id);
+        entidadUsuario.setActivo(true);
+        return usuarioRepositorio.save(entidadUsuario);
+    }
+
+    @Transactional
+    public Usuario baja(String id) throws Exception {
+        Usuario entidadUsuario = usuarioRepositorio.getOne(id);
+        entidadUsuario.setActivo(false);
+        return usuarioRepositorio.save(entidadUsuario);
     }
 
 }

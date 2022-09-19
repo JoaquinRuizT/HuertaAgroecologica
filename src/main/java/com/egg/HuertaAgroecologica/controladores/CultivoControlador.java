@@ -8,6 +8,7 @@ import com.egg.HuertaAgroecologica.servicios.UsuarioServicio;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/cultivo")
-public class CultivoControlador {
+public class CultivoControlador{
 
     @Autowired
     private CultivoServicio cultivoServicio;
@@ -42,17 +43,19 @@ public class CultivoControlador {
             cultivoServicio.crearCultivo(nombre, tipoCultivo, true, temperatura, agua, luz, suelo, estacion, suelo, observaciones, archivo, usuario);
 
             modelo.put("exito", "Cultivo registrado correctamente!");
-            return "index.html";
+            return "form-cultivo.html";
         } catch (MiExcepcion e) {
             modelo.put("error", e.getMessage());
             return "form-cultivo.html";
         }
     }
-
+    
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_GUEST')")
     @GetMapping("/lista")
     public String listar(ModelMap modelo, HttpSession session) {
-        Usuario logueado = (Usuario) session.getAttribute("usuariosession");
-        if(logueado == null){
+        
+       Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+       if(logueado == null){
             return "redirect:/login";
         }
         List<Cultivo> cultivos = cultivoServicio.buscarCultivosPorUsuario(logueado.getId());
@@ -74,6 +77,7 @@ public class CultivoControlador {
         return "cultivo-list.html";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/modificar/{id}")
     public String modificar(@PathVariable String id, ModelMap modelo) {
         Cultivo cultivo = cultivoServicio.getOne(id);
@@ -81,7 +85,8 @@ public class CultivoControlador {
         return "cultivo-modificar.html";
 
     }
-
+    
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/modificar/{id}")
     public String modificar(@PathVariable String id, @RequestParam String nombre, @RequestParam String tipoCultivo,
             @RequestParam String temperatura, @RequestParam String agua, @RequestParam String luz,
@@ -97,26 +102,27 @@ public class CultivoControlador {
 
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/baja/{id}")
     public String baja(ModelMap modelo, @PathVariable String id) {
 
         try {
             cultivoServicio.baja(id);
-            return "redirect:../lista";
+            return "cultivo-list.html";
         } catch (Exception e) {
-            return "redirect:/";
+            return "cultivo-list.html";
         }
 
     }
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/alta/{id}")
     public String alta(ModelMap modelo, @PathVariable String id) {
 
         try {
             cultivoServicio.alta(id);
-            return "redirect:../lista";
+            return "redirect:/admin/listacultivos";
         } catch (Exception e) {
-            return "redirect:/";
+            return "redirect:/admin/listacultivos";
         }
     }
 
@@ -125,9 +131,9 @@ public class CultivoControlador {
 
         try {
             cultivoServicio.baja(id);
-            return "redirect:../lista";
+            return "redirect:/admin/listacultivos";
         } catch (Exception e) {
-            return "redirect:..index";
+            return "redirect:/admin/listacultivos";
         }
 
     }
