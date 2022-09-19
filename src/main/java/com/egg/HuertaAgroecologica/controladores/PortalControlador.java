@@ -23,38 +23,37 @@ import org.springframework.web.multipart.MultipartFile;
  *
  * @author POSITIVO BGH
  */
-
 @Controller
 @RequestMapping("/")
 public class PortalControlador { //localhost:8080/??
-    
+
     @Autowired
     private UsuarioServicio usuarioServicio;
-    
+
     @GetMapping("/")
     public String login() {
         return "login.html";
     }
-    
+
     @PostMapping("/logincheck")
-    public String loginCheck(@RequestParam String email, @RequestParam String password, ModelMap modelo){
-        if(usuarioServicio.loginCheck(email, password)){
-             return "index.html";
+    public String loginCheck(@RequestParam String email, @RequestParam String password, ModelMap modelo) {
+        if (usuarioServicio.loginCheck(email, password)) {
+            return "index.html";
         }
         modelo.put("error", "Email o contraseña incorrecta");
         return "login.html";
     }
-    
+
     @GetMapping("/registrar")
     public String registrar() {
         return "registro.html";
     }
-    
+
     @PostMapping("/registro")
-    public String registro(@RequestParam String nombre, @RequestParam String email, @RequestParam String password, 
-            String password2, ModelMap modelo, MultipartFile archivo){
+    public String registro(@RequestParam String nombre, @RequestParam String email, @RequestParam String password,
+            String password2, ModelMap modelo, MultipartFile archivo) {
         try {
-            
+
             usuarioServicio.registrar(archivo, nombre, email, password, password2);
 
             modelo.put("exito", "Usuario registrado correctamente!");
@@ -64,34 +63,34 @@ public class PortalControlador { //localhost:8080/??
             modelo.put("error", e.getMessage());
             modelo.put("nombre", nombre);
             modelo.put("email", email);
-            
+
             return "registro.html";
         }
     }
-    
+
 //    @GetMapping("/inicio")
 //    public String index() {
 //        return "index.html";
 //    }    
     @GetMapping("/login")
-    public String login(@RequestParam(required=false) String error, ModelMap modelo) {
-        if (error != null){
+    public String login(@RequestParam(required = false) String error, ModelMap modelo) {
+        if (error != null) {
             modelo.put("error", "Usuario o contraseña incorrecta");
         }
         return "login.html";
     }
-    
+
     @PreAuthorize("hasAnyRole('ROLE_GUEST', 'ROLE_ADMIN')")
     @GetMapping("/inicio")
     public String inicio(HttpSession session) {
-        
-       Usuario logueado = (Usuario) session.getAttribute("usuariosession");
-        
+
+        Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+
         if (logueado.getRol().toString().equals("ADMIN")) {
             return "redirect:/admin/dashboard";
-       }
-        
-           return "index.html";
+        }
+
+        return "index.html";
     }
-//    
+    
 }
