@@ -30,7 +30,8 @@ public class CultivoServicio {
 
     @Transactional
     public void crearCultivo(String nombre, String tipoCultivo, boolean alta, String temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo, Usuario usuario) throws MiExcepcion {
-//vamos a hacer metodo validar?
+
+        validarCultivo(nombre, tipoCultivo, temperatura, agua, luz, suelo, estacion, viento, observaciones, archivo);
         Cultivo cultivo = new Cultivo();
 
         cultivo.setNombre(nombre);
@@ -71,10 +72,10 @@ public class CultivoServicio {
             cultivo.setViento(viento);
             cultivo.setObservaciones(observaciones);
             cultivo.setFecha(new Date());
-            
+
             String idFoto = null;
-            
-            if(cultivo.getImagenCultivo() != null){
+
+            if (cultivo.getImagenCultivo() != null) {
                 idFoto = cultivo.getImagenCultivo().getId();
             }
 
@@ -130,12 +131,12 @@ public class CultivoServicio {
         cultivoRepositorio.save(entidad);
     }
 
-    public List<Cultivo> buscarCultivosPorUsuario(String idUsuario){
+    public List<Cultivo> buscarCultivosPorUsuario(String idUsuario) {
         List<Cultivo> cultivos = new ArrayList();
         cultivos = cultivoRepositorio.buscarCultivoPorUsuario(idUsuario);
         return cultivos;
     }
-    
+
     /*método para "eliminar" sigue en la base de datos pero esta en el estado de BAJA*/
     public void baja(String id) {
 
@@ -145,43 +146,25 @@ public class CultivoServicio {
         cultivoRepositorio.save(entidad);
     }
 
-    //ver si agregamos validarCultivo para crear/modificar (llamar al validar en esos métodos)
-//    private void validarCultivo(String id,String nombre, String tipoCultivo, Date fecha, boolean alta, 
-//            double temperatura, String agua, String luz, String suelo, String estacion, String viento, 
-//            String observaciones, MultipartFile archivo) throws MiExcepcion {
-//
-//        if (nombre.isEmpty() || nombre == null) {
-//            throw new MiExcepcion("El nombre no puede ser nulo o estar vacío");
-//        }
-//        if (tipoCultivo.isEmpty() || tipoCultivo == null) {
-//            throw new MiExcepcion("El tipo de cultivo no puede ser nulo o estar vacío");
-//        }
-//        //si modificamos un cultivo, se toma la fecha de modificacion?
-//         if (fecha == null) {//fecha.isEmpty() larga error,ver boolean y double tambien dan error
-//            throw new MiExcepcion("La fecha del cultivo no puede ser nula");
-//        }
-//         
-//        if (agua.isEmpty() || agua == null) {
-//            throw new MiExcepcion("El agua del cultivo no puede ser nula o estar vacía");
-//        }
-//        
-//        if (luz.isEmpty() || luz == null) {
-//            throw new MiExcepcion("La luz del cultivo no puede ser nula o estar vacía");
-//        }
-//        
-//        if (suelo.isEmpty() || suelo == null) {
-//            throw new MiExcepcion("El suelo del cultivo no puede ser nulo o estar vacío");
-//        }
-//        
-//        if (estacion.isEmpty() || estacion == null) {
-//            throw new MiExcepcion("La estación del cultivo no puede ser nula o estar vacía");
-//        }
-//        
-//        if (viento.isEmpty() || viento == null) {
-//            throw new MiExcepcion("El viento del cultivo no puede ser nulo o estar vacío");
-//        }
-//        
-//        //observaciones podrían ser nulas/vacías
-//        
-//    }
+    public void validarCultivo(String nombre, String tipoCultivo,
+            String temperatura, String agua, String luz, String suelo, String estacion, String viento,
+            String observaciones, MultipartFile archivo) throws MiExcepcion {
+
+        if (nombre.isEmpty() || nombre == null) {
+            throw new MiExcepcion("Debes colocar un nombre");
+        }
+
+        if (temperatura.isEmpty() || temperatura == null) {
+            throw new MiExcepcion("Debes colocar la temperatura");
+        }
+
+        if (suelo.isEmpty() || suelo == null) {
+            throw new MiExcepcion("Debes colocar el tipo de suelo");
+        }
+
+        if (archivo.isEmpty() || archivo == null) {
+            throw new MiExcepcion("Debes colocar una foto");
+        }
+
+    }
 }
