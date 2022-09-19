@@ -32,7 +32,7 @@
                         <th scope="col">Estación</th>
                         <th scope="col">Observaciones</th>
                         <th scope="col">Foto</th>
-                        <th scope="col">Estado</th>
+                        <th scope="col">Es</th>
                         <th scope="col" sec:authorize="hasRole('ADMIN')">Acción</th>
 
                     </tr>
@@ -54,7 +54,7 @@
                         </td>
                         <td>
                             <a th:href="@{/cultivo/modificar/__${cultivo.id}__}" class="btn btn-warning" sec:authorize="hasRole('ADMIN')" >Modificar</a>
-                            <a th:href="@{/cultivo/alta/__${cultivo.id}__}" sec:authorize="hasRole('ADMIN')"><i class="fa fa-arrow-up"></i></a> 
+                            <a th:href="@{/cultivo/alta/__${cultivo.id}__}" sec:authorize="hasRole('ADMIN')"><i class="fa fa-arrow-up"></i>Si</a> 
                             <a th:href="@{/cultivo/baja/__${cultivo.id}__}" sec:authorize="hasRole('ADMIN')"><i class="fa fa-ban"></i></a>
                         </td>
                     </tr>

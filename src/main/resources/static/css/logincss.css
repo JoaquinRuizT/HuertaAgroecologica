@@ -1,5 +1,6 @@
 body, html {
     height: 100%;
+    margin: 0;
   }
   
   * {
@@ -8,10 +9,12 @@ body, html {
   
   .bg-img {
     /* The image used */
-    background-image: url("/img/hidroponico.png");
+    background-image: url("/img/jardineria2.jpg");
   
-    /* Control the height of the image */
-    min-height: 100%;
+  /* Control the height of the image */
+  min-height: 180%; 
+  
+    
   
     /* Center and scale the image nicely */
     background-position: center;
@@ -62,4 +65,8 @@ body, html {
   
   .container {
     margin-top: 10px;
+  }
+  
+  h3 {
+      text-align: center;
   }
