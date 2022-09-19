@@ -85,15 +85,15 @@ public class UsuarioServicio implements UserDetailsService {
             usuarioRepositorio.save(usuario);
         }
     }
-    
+
     @Transactional
-    public boolean loginCheck(String email, String password){
+    public boolean loginCheck(String email, String password) {
         Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
-        if(usuario != null && usuario.getPassword().equals(password)){
+        if (usuario != null && usuario.getPassword().equals(password)) {
             return true;
         }
         return false;
-        
+
     }
 
     @Transactional
@@ -106,15 +106,23 @@ public class UsuarioServicio implements UserDetailsService {
             //dejamos delete? o le damos de baja con un atributo de tipo boleano?
         }
     }
-    
-    //agregar este metodo a Usuario?
-    public List<Usuario> listarUsuarios(){
-        List<Usuario> usuarios=new ArrayList();
-        usuarios= usuarioRepositorio.findAll();
-        return usuarios;
+
+    public Usuario buscarUsuarioPorEmail(String email) {
+        Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
+        if (usuario != null) {
+            return usuario;
+        } else {
+            return null;
+        }
     }
     
-    public Usuario buscarPorId(String id){
+    public List<Usuario> listarUsuarios() {
+        List<Usuario> usuarios = new ArrayList();
+        usuarios = usuarioRepositorio.findAll();
+        return usuarios;
+    }
+
+    public Usuario buscarPorId(String id) {
         Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
         if (respuesta.isPresent()) {
             Usuario usuario = respuesta.get();
@@ -130,19 +138,19 @@ public class UsuarioServicio implements UserDetailsService {
             List<GrantedAuthority> permisos = new ArrayList();
             GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().toString());
             permisos.add(p);
-            
-            ServletRequestAttributes attr= (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-            
+
+            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+
             HttpSession session = attr.getRequest().getSession(true);
-            
+
             session.setAttribute("usuariosession", usuario);
-            
+
             return new User(usuario.getEmail(), usuario.getPassword(), permisos);
         } else {
             return null;
         }
     }
-    
+
     @Transactional
     public Usuario alta(String id) throws Exception {
         Usuario entidadUsuario = usuarioRepositorio.getOne(id);
