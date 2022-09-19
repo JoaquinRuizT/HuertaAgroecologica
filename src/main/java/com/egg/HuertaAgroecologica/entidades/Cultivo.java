@@ -173,4 +173,5 @@ public class Cultivo implements Serializable {
     public String toString() {
         return "Cultivo{" + "id=" + id + ", nombre=" + nombre + ", tipoCultivo=" + tipoCultivo + ", fecha=" + fecha + ", alta=" + alta + ", temperatura=" + temperatura + ", agua=" + agua + ", luz=" + luz + ", suelo=" + suelo + ", estacion=" + estacion + ", viento=" + viento + ", imagenCultivo=" + imagenCultivo + ", observaciones=" + observaciones + '}';
     }
+
 }

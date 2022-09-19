@@ -58,13 +58,13 @@ public class PortalControlador { //localhost:8080/??
 
             modelo.put("exito", "Usuario registrado correctamente!");
 
-            return "index.html";
+            return "login.html";
         } catch (MiExcepcion e) {
             modelo.put("error", e.getMessage());
             modelo.put("nombre", nombre);
             modelo.put("email", email);
 
-            return "login.html";
+            return "registro.html";
         }
     }
 
