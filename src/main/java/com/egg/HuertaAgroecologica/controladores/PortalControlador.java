@@ -64,7 +64,7 @@ public class PortalControlador { //localhost:8080/??
             modelo.put("nombre", nombre);
             modelo.put("email", email);
 
-            return "registro.html";
+            return "login.html";
         }
     }
 

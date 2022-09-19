@@ -2,6 +2,7 @@ package com.egg.HuertaAgroecologica.servicios;
 
 import com.egg.HuertaAgroecologica.entidades.Cultivo;
 import com.egg.HuertaAgroecologica.entidades.Foto;
+import com.egg.HuertaAgroecologica.entidades.Usuario;
 import com.egg.HuertaAgroecologica.excepciones.MiExcepcion;
 import com.egg.HuertaAgroecologica.repositorios.CultivoRepositorio;
 import java.util.ArrayList;
@@ -28,14 +29,14 @@ public class CultivoServicio {
     private FotoServicio fotoServicio;
 
     @Transactional
-    public void crearCultivo(String nombre, String tipoCultivo, boolean alta, String temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo) throws MiExcepcion {
-        
+    public void crearCultivo(String nombre, String tipoCultivo, boolean alta, String temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo, Usuario usuario) throws MiExcepcion {
+
         validarCultivo(nombre, tipoCultivo, temperatura, agua, luz, suelo, estacion, viento, observaciones, archivo);
         Cultivo cultivo = new Cultivo();
 
         cultivo.setNombre(nombre);
         cultivo.setTipoCultivo(tipoCultivo);
-        cultivo.setAlta(true);
+        cultivo.setAlta(false);
         cultivo.setTemperatura(temperatura);
         cultivo.setAgua(agua);
         cultivo.setLuz(luz);
@@ -44,6 +45,7 @@ public class CultivoServicio {
         cultivo.setViento(viento);
         cultivo.setObservaciones(observaciones);
         cultivo.setFecha(new Date());
+        cultivo.setUsuario(usuario);
 
         Foto foto = fotoServicio.guardar(archivo);
         cultivo.setImagenCultivo(foto);
@@ -129,6 +131,12 @@ public class CultivoServicio {
         cultivoRepositorio.save(entidad);
     }
 
+    public List<Cultivo> buscarCultivosPorUsuario(String idUsuario) {
+        List<Cultivo> cultivos = new ArrayList();
+        cultivos = cultivoRepositorio.buscarCultivoPorUsuario(idUsuario);
+        return cultivos;
+    }
+
     /*método para "eliminar" sigue en la base de datos pero esta en el estado de BAJA*/
     public void baja(String id) {
 
@@ -145,7 +153,7 @@ public class CultivoServicio {
         if (nombre.isEmpty() || nombre == null) {
             throw new MiExcepcion("El nombre no puede ser nulo o estar vacío");
         }
-        
+
         if (temperatura.isEmpty() || temperatura == null) {
             throw new MiExcepcion("Debes colocar la temperatura");
         }

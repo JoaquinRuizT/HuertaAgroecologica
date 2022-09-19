@@ -2,16 +2,19 @@ package com.egg.HuertaAgroecologica.entidades;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Cultivo implements Serializable {
-    
+
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
@@ -28,12 +31,21 @@ public class Cultivo implements Serializable {
     private String estacion;
     private String viento;
     private String observaciones;
-    
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Usuario usuario;
+
     @OneToOne
     private Foto imagenCultivo;
-    
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     //tipoDeRiego
-    
     public Cultivo() {
     }
 
@@ -52,8 +64,6 @@ public class Cultivo implements Serializable {
         this.imagenCultivo = imagenCultivo;
         this.observaciones = observaciones;
     }
-
-   
 
     public String getTemperatura() {
         return temperatura;
@@ -103,7 +113,6 @@ public class Cultivo implements Serializable {
         this.viento = viento;
     }
 
-   
     public Foto getImagenCultivo() {
         return imagenCultivo;
     }
@@ -111,8 +120,6 @@ public class Cultivo implements Serializable {
     public void setImagenCultivo(Foto imagenCultivo) {
         this.imagenCultivo = imagenCultivo;
     }
-
-  
 
     public String getId() {
         return id;
@@ -166,6 +173,4 @@ public class Cultivo implements Serializable {
     public String toString() {
         return "Cultivo{" + "id=" + id + ", nombre=" + nombre + ", tipoCultivo=" + tipoCultivo + ", fecha=" + fecha + ", alta=" + alta + ", temperatura=" + temperatura + ", agua=" + agua + ", luz=" + luz + ", suelo=" + suelo + ", estacion=" + estacion + ", viento=" + viento + ", imagenCultivo=" + imagenCultivo + ", observaciones=" + observaciones + '}';
     }
-
-   
 }
