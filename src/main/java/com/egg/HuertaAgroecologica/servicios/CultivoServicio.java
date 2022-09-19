@@ -151,7 +151,7 @@ public class CultivoServicio {
             String observaciones, MultipartFile archivo) throws MiExcepcion {
 
         if (nombre.isEmpty() || nombre == null) {
-            throw new MiExcepcion("El nombre no puede ser nulo o estar vacío");
+            throw new MiExcepcion("Debes colocar un nombre");
         }
 
         if (temperatura.isEmpty() || temperatura == null) {

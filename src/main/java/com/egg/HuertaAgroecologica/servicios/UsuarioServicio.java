@@ -125,25 +125,6 @@ public class UsuarioServicio implements UserDetailsService {
         usuarios = usuarioRepositorio.findAll();
         return usuarios;
     }
-    
-    public Usuario buscarUsuarioPorEmail(String email){
-        Usuario usuario = usuarioRepositorio.buscarPorEmail(email);
-        if(usuario != null){
-            return usuario;
-        }
-        else{
-            return null;
-        }
-    }
-    
-    public Usuario buscarPorId(String id) {
-        Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
-        if (respuesta.isPresent()) {
-            Usuario usuario = respuesta.get();
-            return usuario;
-        }
-        return null;
-    }
 
     public Usuario buscarPorId(String id) {
         Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
