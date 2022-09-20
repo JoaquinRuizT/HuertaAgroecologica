@@ -29,14 +29,14 @@ public class CultivoServicio {
     private FotoServicio fotoServicio;
 
     @Transactional
-    public void crearCultivo(String nombre, String tipoCultivo, boolean alta, String temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo, Usuario usuario) throws MiExcepcion {
+    public void crearCultivo(String nombre, String tipoCultivo, double temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo, Usuario usuario) throws MiExcepcion {
 
-        validarCultivo(nombre, tipoCultivo, temperatura, agua, luz, suelo, estacion, viento, observaciones, archivo);
+        validarCultivo(temperatura);
         Cultivo cultivo = new Cultivo();
 
         cultivo.setNombre(nombre);
         cultivo.setTipoCultivo(tipoCultivo);
-        cultivo.setAlta(false);
+        cultivo.setEstado(2);
         cultivo.setTemperatura(temperatura);
         cultivo.setAgua(agua);
         cultivo.setLuz(luz);
@@ -55,7 +55,7 @@ public class CultivoServicio {
     }
 
     @Transactional
-    public void modificarCultivo(String id, String nombre, String tipoCultivo, String temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo) throws MiExcepcion, Exception {
+    public void modificarCultivo(String id, String nombre, String tipoCultivo, double temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo) throws MiExcepcion, Exception {
         //vamos a hacer metodo validar?
         Optional<Cultivo> respuesta = cultivoRepositorio.findById(id);
         if (respuesta.isPresent()) {
@@ -63,7 +63,6 @@ public class CultivoServicio {
 
             cultivo.setNombre(nombre);
             cultivo.setTipoCultivo(tipoCultivo);
-            cultivo.setAlta(true);
             cultivo.setTemperatura(temperatura);
             cultivo.setAgua(agua);
             cultivo.setLuz(luz);
@@ -127,7 +126,7 @@ public class CultivoServicio {
 
         Cultivo entidad = cultivoRepositorio.getOne(id);
 
-        entidad.setAlta(true);
+        entidad.setEstado(1);
         cultivoRepositorio.save(entidad);
     }
 
@@ -142,29 +141,14 @@ public class CultivoServicio {
 
         Cultivo entidad = cultivoRepositorio.getOne(id);
 
-        entidad.setAlta(false);
+        entidad.setEstado(0);
         cultivoRepositorio.save(entidad);
     }
 
-    public void validarCultivo(String nombre, String tipoCultivo,
-            String temperatura, String agua, String luz, String suelo, String estacion, String viento,
-            String observaciones, MultipartFile archivo) throws MiExcepcion {
+    public void validarCultivo(double temperatura) throws MiExcepcion {
 
-        if (nombre.isEmpty() || nombre == null) {
-            throw new MiExcepcion("Debes colocar un nombre");
+        if(temperatura < 0.0d || temperatura > 40.0d){
+            throw new MiExcepcion("No es una temperatura válida");
         }
-
-        if (temperatura.isEmpty() || temperatura == null) {
-            throw new MiExcepcion("Debes colocar la temperatura");
-        }
-
-        if (suelo.isEmpty() || suelo == null) {
-            throw new MiExcepcion("Debes colocar el tipo de suelo");
-        }
-
-        if (archivo.isEmpty() || archivo == null) {
-            throw new MiExcepcion("Debes colocar una foto");
-        }
-
     }
 }

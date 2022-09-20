@@ -23,8 +23,8 @@ public class Cultivo implements Serializable {
     private String tipoCultivo;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
-    private boolean alta;
-    private String temperatura;
+    private int estado;
+    private double temperatura;
     private String agua;
     private String luz;
     private String suelo;
@@ -37,39 +37,72 @@ public class Cultivo implements Serializable {
     @OneToOne
     private Foto imagenCultivo;
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    //tipoDeRiego
-    public Cultivo() {
-    }
-
-    public Cultivo(String id, String nombre, String tipoCultivo, Date fecha, boolean alta, String temperatura, String agua, String luz, String suelo, String estacion, String viento, Foto imagenCultivo, String observaciones) {
+    public Cultivo(String id, String nombre, String tipoCultivo, Date fecha, int estado, double temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, Usuario usuario, Foto imagenCultivo) {
         this.id = id;
         this.nombre = nombre;
         this.tipoCultivo = tipoCultivo;
         this.fecha = fecha;
-        this.alta = alta;
+        this.estado = estado;
         this.temperatura = temperatura;
         this.agua = agua;
         this.luz = luz;
         this.suelo = suelo;
         this.estacion = estacion;
         this.viento = viento;
-        this.imagenCultivo = imagenCultivo;
         this.observaciones = observaciones;
+        this.usuario = usuario;
+        this.imagenCultivo = imagenCultivo;
+    }    
+    
+    //tipoDeRiego
+    public Cultivo() {
     }
 
-    public String getTemperatura() {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getTipoCultivo() {
+        return tipoCultivo;
+    }
+
+    public void setTipoCultivo(String tipoCultivo) {
+        this.tipoCultivo = tipoCultivo;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
+    public double getTemperatura() {
         return temperatura;
     }
 
-    public void setTemperatura(String temperatura) {
+    public void setTemperatura(double temperatura) {
         this.temperatura = temperatura;
     }
 
@@ -113,54 +146,6 @@ public class Cultivo implements Serializable {
         this.viento = viento;
     }
 
-    public Foto getImagenCultivo() {
-        return imagenCultivo;
-    }
-
-    public void setImagenCultivo(Foto imagenCultivo) {
-        this.imagenCultivo = imagenCultivo;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getTipoCultivo() {
-        return tipoCultivo;
-    }
-
-    public void setTipoCultivo(String tipoCultivo) {
-        this.tipoCultivo = tipoCultivo;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public boolean isAlta() {
-        return alta;
-    }
-
-    public void setAlta(boolean alta) {
-        this.alta = alta;
-    }
-
     public String getObservaciones() {
         return observaciones;
     }
@@ -169,9 +154,27 @@ public class Cultivo implements Serializable {
         this.observaciones = observaciones;
     }
 
+    public Foto getImagenCultivo() {
+        return imagenCultivo;
+    }
+
+    public void setImagenCultivo(Foto imagenCultivo) {
+        this.imagenCultivo = imagenCultivo;
+    }
+    
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     @Override
     public String toString() {
-        return "Cultivo{" + "id=" + id + ", nombre=" + nombre + ", tipoCultivo=" + tipoCultivo + ", fecha=" + fecha + ", alta=" + alta + ", temperatura=" + temperatura + ", agua=" + agua + ", luz=" + luz + ", suelo=" + suelo + ", estacion=" + estacion + ", viento=" + viento + ", imagenCultivo=" + imagenCultivo + ", observaciones=" + observaciones + '}';
+        return "Cultivo{" + "id=" + id + ", nombre=" + nombre + ", tipoCultivo=" + tipoCultivo + ", fecha=" + fecha + ", estado=" + estado + ", temperatura=" + temperatura + ", agua=" + agua + ", luz=" + luz + ", suelo=" + suelo + ", estacion=" + estacion + ", viento=" + viento + ", observaciones=" + observaciones + ", usuario=" + usuario + ", imagenCultivo=" + imagenCultivo + '}';
     }
+
+    
 
 }

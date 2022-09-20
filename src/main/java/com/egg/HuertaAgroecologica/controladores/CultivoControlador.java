@@ -35,14 +35,14 @@ public class CultivoControlador{
 
     @PostMapping("/registro")
     public String registro(@RequestParam String nombre, @RequestParam String tipoCultivo,
-            @RequestParam String temperatura, @RequestParam String agua, @RequestParam String luz,
+            @RequestParam double temperatura, @RequestParam String agua, @RequestParam String luz,
             @RequestParam String suelo, @RequestParam String estacion, String observaciones, @RequestParam MultipartFile archivo, ModelMap modelo, HttpSession session) {
         try {
             Usuario logueado = (Usuario) session.getAttribute("usuariosession");
             Usuario usuario = usuarioServicio.buscarPorId(logueado.getId());
-            cultivoServicio.crearCultivo(nombre, tipoCultivo, true, temperatura, agua, luz, suelo, estacion, suelo, observaciones, archivo, usuario);
-
-            modelo.put("exito", "Cultivo registrado correctamente!");
+            cultivoServicio.crearCultivo(nombre, tipoCultivo, temperatura, agua, luz, suelo, estacion, suelo, observaciones, archivo, usuario);
+            
+            modelo.put("exito", "¡Cultivo registrado correctamente! Ahora quedará en revisión");
             return "form-cultivo.html";
         } catch (MiExcepcion e) {
             modelo.put("error", e.getMessage());
@@ -92,7 +92,7 @@ public class CultivoControlador{
             @RequestParam String temperatura, @RequestParam String agua, @RequestParam String luz,
             @RequestParam String suelo, @RequestParam String estacion, String observaciones, @RequestParam MultipartFile archivo, ModelMap modelo) throws Exception {
         try {
-            cultivoServicio.modificarCultivo(id, nombre, tipoCultivo, temperatura, agua, luz, suelo, estacion, suelo, observaciones, archivo);
+            cultivoServicio.modificarCultivo(id, nombre, tipoCultivo, 0, agua, luz, suelo, estacion, suelo, observaciones, archivo);
             return "redirect:../lista";
         } catch (MiExcepcion ex) {
             // TODO Auto-generated catch block
