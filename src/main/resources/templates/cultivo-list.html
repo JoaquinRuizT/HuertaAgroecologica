@@ -49,7 +49,7 @@
                         <th th:text="${cultivo.suelo}"></th>
                         <th th:text="${cultivo.estacion}"></th>
                         <th th:text="${cultivo.observaciones}"></th>
-                        <th><img th:src="@{/foto/fotografias/__${cultivo.imagenCultivo.id}__}"></img></th>
+                        <th><img id="fotocultivo" th:src="@{/foto/fotografias/__${cultivo.imagenCultivo.id}__}"></img></th>
                         <td>
                             <i th:if="${cultivo.estado == 1}" class="fa fa-circle text-success"></i>
                             <i th:if="${cultivo.estado == 0}" class="fa fa-circle" style="color:red;"></i>

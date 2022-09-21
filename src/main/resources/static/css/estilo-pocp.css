@@ -164,13 +164,13 @@ form .fields .input-field {
    width: auto;
    padding-right: 40px;
 }
-img{
-    max-width: 120px ;
+#fotocultivo{
+    max-width: 100px ;
 }
 img {
     margin: 0;
     max-width: 100%;
-    min-height: 10px;
+    min-height: 10px;3
     
     background-position: center;
     background-repeat: no-repeat;
