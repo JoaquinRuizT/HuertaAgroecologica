@@ -37,7 +37,7 @@ public class ProduccionServicio {
         Double cantidadDecimal = Double.parseDouble(cantidad);
         Integer yearEntero = Integer.parseInt(year);
         Produccion produccion = new Produccion();
-        
+        validar(cantidadDecimal, yearEntero);
         Optional<String> respuesta = Optional.ofNullable(idCultivo);
         if(respuesta.isPresent()){
             Cultivo cultivo = cultivoRepositorio.getOne(idCultivo);
@@ -145,5 +145,18 @@ public class ProduccionServicio {
 
         entidad.setAlta(false);
         produccionRepositorio.save(entidad);
+    }
+    
+    public void validar(Double cantidad, Integer year) throws MiExcepcion{
+        
+        if(cantidad < 0){
+            throw new MiExcepcion("Debes colocar una cantidad válida");
+        }
+        
+        Date fechaActual = new Date();
+        
+        if(year < 1970 || year > fechaActual.getYear()){
+            throw new MiExcepcion("Debes colocar un año válido");
+        }
     }
 }
