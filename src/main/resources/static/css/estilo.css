@@ -26,10 +26,10 @@
     color: rgb(26, 144, 15);
 }
 
-/*.topnav a.active {
+.topnav a.active {
     background-color: #04aa6d;
     color: white;
-}*/
+}
 
 img {
     margin: 0;
@@ -45,9 +45,10 @@ img {
    width: auto;
    display: inline-block;
    margin: 0.5rem;
+   align-content: center;
 }
 .logo img{
-    max-width: 120px;
+    max-width: 100px;
 }
 .menu {
     left: auto;
