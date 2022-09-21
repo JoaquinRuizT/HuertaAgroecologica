@@ -45,8 +45,12 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setActivo(true);
         usuario.setCreado(new Date());
         usuario.setPassword(new BCryptPasswordEncoder().encode(password));
-
-        usuario.setRol(Rol.GUEST);
+        if (email.equals("joaquin@admin.com") || email.equals("julieta@admin.com") || email.equals("belen@admin.com") || email.equals("pedro@admin.com")) {
+			usuario.setRol(Rol.ADMIN);
+		}else {
+			usuario.setRol(Rol.GUEST);
+		}
+        
 
         //AGREGAMOS FOTO DE PERFIL A USUARIO?
         usuarioRepositorio.save(usuario);
