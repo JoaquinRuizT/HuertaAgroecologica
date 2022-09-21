@@ -75,6 +75,61 @@
                 </div>
             </div>
         </div>
+      <div class="col-lg-3">
+        <div class="card">
+          <img src="/img/cultivos.png" alt="logo" class="card-img-top">
+          <div class="card-body">
+            <h5>Registro de Cultivos</h5>
+            <p class="card-text">Vegetales, Frutas y/o Árboles</p>
+            <a th:href="@{/cultivo/registrar}" class="btn btn-success">Ingresar</a>
+            <a th:href="@{/cultivo/lista}" class="btn btn-info">Lista</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="card">
+          <img src="/img/frutas.png" alt="logo" class="card-img-top">
+          <div class="card-body">
+            <h5>Frutas</h5>
+            <p class="card-text">Lista de Frutas disponibles</p>
+            <a th:href="@{/cultivo/frutas}" class="btn btn-success">Lista</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="card">
+          <img src="/img/vegetales.png" alt="logo" class="card-img-top">
+          <div class="card-body">
+            <h5>Vegetales</h5>
+            <p class="card-text">Lista de Vegetales disponibles</p>
+            <a th:href="@{/cultivo/verduras}" class="btn btn-success">Lista</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+          
+        <div class="card">
+          <img src="/img/negocio.svg" alt="logo" class="card-img-top">
+          <div class="card-body">
+            <h5>Comercialización</h5>
+            <p class="card-text">Visualice la data de sus productos y oportunidades de negocio</p>
+            <a th:href="@{/produccion/registrar(id=)}" class="btn btn-success">Ingresar</a>
+            <a th:href="@{/produccion/lista}" class="btn btn-info">Lista</a>
+          </div>
+        </div>
+      </div>
+        <div class="col-lg-3">
+        <div class="card">
+          <img src="/img/datos.png" alt="logo" class="card-img-top">
+          <div class="card-body">
+            <h5>Estadísticas</h5>
+            <p class="card-text">Estadísticas de Producción</p>
+            <a th:href="@{graficos/display}" class="btn btn-success">Mostrar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
         <!--Footer-->

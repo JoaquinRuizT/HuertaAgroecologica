@@ -29,8 +29,8 @@
 
                             <div class="input-field">
 
-                                <select name="idCultivo">
-                                    <option>Seleccionar Cultivo</option>
+                                <select name="idCultivo" required>
+                                    <option value="">Seleccionar cultivo </option>
 
                                     <option th:each="cultivo: ${cultivos}"
                                             th:value="${cultivo.id}" th:text="${cultivo.nombre}" />
@@ -40,12 +40,13 @@
 
                             <div class="input-field">
                                 <label for="">Cantidad (kg)</label>
-                                <input type="text" name="cantidad" class="form-control" th:value="${cantidad}">
+                                <input type="text" name="cantidad" class="form-control" th:value="${cantidad}" required>
                             </div>
 
                             <div class="input-field">
                                 <label for="">Seleccione el Mes de Producción</label>
-                                <select class="form-select" aria-label="Default select example" th:name="mes" th:value="${mes}">
+                                <select class="form-select" th:name="mes" th:value="${mes}" required>
+                                    <option value="">Seleccionar mes </option>
                                     <option value="Enero">Enero</option>
                                     <option value="Febrero">Febrero</option>
                                     <option value="Marzo">Marzo</option>
@@ -63,7 +64,7 @@
                             
                             <div class="input-field">
                                 <label for="">Ingrese el año</label>
-                                <input type="text" name="year" class="form-control" th:value="${year}">
+                                <input type="text" name="year" class="form-control" th:value="${year}" required>
                             </div>
 
                         </div>
