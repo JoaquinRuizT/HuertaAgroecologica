@@ -50,7 +50,7 @@ public class ProduccionControlador {
             modelo.put("exito", "Se ha registrado la producción correctamente");
             return "error-produccion.html";
         } catch (MiExcepcion ex) {
-            modelo.put("error", "No se ha podido registrar correctamente");
+            modelo.put("error", ex.getMessage());
             return "error-produccion.html";
         }
     }
