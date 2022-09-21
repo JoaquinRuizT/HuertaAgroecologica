@@ -50,9 +50,9 @@ public class AdminControlador {
     public String baja(@PathVariable String id) {
         try {
             usuarioServicio.baja(id);
-            return "redirect:/admin/listacultivos";
+            return "redirect:/admin/lista";
         } catch (Exception e) {
-            return "redirect:/lista";
+            return "redirect:/admin/lista";
         }
     }
 
@@ -61,9 +61,9 @@ public class AdminControlador {
     public String alta(@PathVariable String id) {
         try {
             usuarioServicio.alta(id);
-            return "redirect:/lista";
+            return "redirect:/admin/lista";
         } catch (Exception e) {
-            return "redirect:/lista";
+            return "redirect:/admin/lista";
         }
     }
     

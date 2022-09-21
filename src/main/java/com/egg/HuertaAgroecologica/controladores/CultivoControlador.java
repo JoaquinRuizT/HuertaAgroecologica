@@ -108,9 +108,9 @@ public class CultivoControlador{
 
         try {
             cultivoServicio.baja(id);
-            return "cultivo-list.html";
+            return "redirect:/admin/listacultivos";
         } catch (Exception e) {
-            return "cultivo-list.html";
+            return "redirect:/admin/listacultivos";
         }
 
     }
