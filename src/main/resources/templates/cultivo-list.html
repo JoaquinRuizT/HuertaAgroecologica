@@ -25,6 +25,7 @@
                     <tr>
 
                         <th scope="col">Nombre</th>
+                        <th scope="col">Usuario</th>
                         <th scope="col">tipoCultivo</th>
                         <th scope="col">temperatura</th>
                         <th scope="col">Agua</th>
@@ -42,6 +43,7 @@
                 <tbody th:each="cultivo:${cultivos}">
                     <tr>
                         <th th:text="${cultivo.nombre}"></th>
+                        <th th:text="${cultivo.usuario.nombre}"></th>
                         <th th:text="${cultivo.tipoCultivo}"></th>
                         <td th:text="${cultivo.temperatura}"></td>
                         <th th:text="${cultivo.agua}"></th>
