@@ -33,7 +33,7 @@
                         <th scope="col">Estación</th>
                         <th scope="col">Observaciones</th>
                         <th scope="col">Foto</th>
-                        <th scope="col">Estado <button type="button" class="btn btn-success" data-bs-trigger="hover focus" data-bs-toggle="popover" title="Estado de publicación" data-bs-content="Verde: activo <br><br> Rojo: Inactivo/En revisión" data-bs-html="true" >?</button></th>
+                        <th scope="col">Estado <button type="button" class="btn btn-success" data-bs-trigger="hover focus" data-bs-toggle="popover" title="Estado de publicación" data-bs-content="Verde: activo <br><br> Naranja: en revisión <br><br> Rojo: inactivo" data-bs-html="true" >?</button></th>
                         <th scope="col" sec:authorize="hasRole('ADMIN')">Acción</th>
 
                     </tr>
@@ -51,13 +51,14 @@
                         <th th:text="${cultivo.observaciones}"></th>
                         <th><img th:src="@{/foto/fotografias/__${cultivo.imagenCultivo.id}__}"></img></th>
                         <td>
-                            <i th:if="${cultivo.alta}" class="fa fa-circle text-success"></i>
-                            <i th:unless="${cultivo.alta}" class="fa fa-circle" style="color:red;"></i>
+                            <i th:if="${cultivo.estado == 1}" class="fa fa-circle text-success"></i>
+                            <i th:if="${cultivo.estado == 0}" class="fa fa-circle" style="color:red;"></i>
+                            <i th:if="${cultivo.estado == 2}" class="fa fa-circle" style="color:orange;"></i>
                         </td>
                         <td>
                             <a th:href="@{/cultivo/modificar/__${cultivo.id}__}" class="btn btn-warning" sec:authorize="hasRole('ADMIN')" >Modificar</a>
-                            <a th:href="@{/cultivo/alta/__${cultivo.id}__}" sec:authorize="hasRole('ADMIN')"><i class="fa fa-arrow-up">Si</i></a> 
-                            <a th:href="@{/cultivo/baja/__${cultivo.id}__}" sec:authorize="hasRole('ADMIN')"><i class="fa fa-ban">Falta autorizacion</i></a>
+                            <a th:href="@{/cultivo/alta/__${cultivo.id}__}" sec:authorize="hasRole('ADMIN')"><i class="fa fa-arrow-up">Alta</i></a> 
+                            <a th:href="@{/cultivo/baja/__${cultivo.id}__}" sec:authorize="hasRole('ADMIN')"><i class="fa fa-ban">Baja</i></a>
                         </td>
                     </tr>
 

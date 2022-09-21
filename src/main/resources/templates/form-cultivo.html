@@ -25,7 +25,7 @@
                         <div class="fields">
                             <div class="input-field">
                                 <label for="">Nombre</label>
-                                <input type="text" name="nombre" class="form-control" th:value="${nombre}">
+                                <input type="text" name="nombre" class="form-control" th:value="${nombre}" required>
                             </div>
 
                             <div class="input-field">
@@ -40,7 +40,7 @@
 
                             <div class="input-field">
                                 <label for="">Temperatura (°C)</label>
-                                <input type="text" name="temperatura" class="form-control" th:value="${temperatura}">
+                                <input type="text" name="temperatura" class="form-control" th:value="${temperatura}" required>
                             </div>
 
                             <div class="input-field">
@@ -63,7 +63,7 @@
 
                             <div class="input-field">
                                 <label for="">Tipo de suelo</label>
-                                <input type="text" name="suelo" class="form-control" th:value="${suelo}">
+                                <input type="text" name="suelo" class="form-control" th:value="${suelo}" required>
                             </div>
 
                             <div class="input-field">
@@ -93,7 +93,7 @@
 
                             <div class="form-group">
 
-                                <input type="file" class="form-control" id="file" name="archivo" />
+                                <input type="file" class="form-control" id="file" name="archivo" required>
                             </div>
                         </div>
 
