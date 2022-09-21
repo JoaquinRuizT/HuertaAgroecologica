@@ -50,7 +50,7 @@ public class AdminControlador {
     public String baja(@PathVariable String id) {
         try {
             usuarioServicio.baja(id);
-            return "redirect:/lista";
+            return "redirect:/admin/listacultivos";
         } catch (Exception e) {
             return "redirect:/lista";
         }

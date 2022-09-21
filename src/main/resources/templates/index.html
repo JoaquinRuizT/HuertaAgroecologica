@@ -27,7 +27,8 @@
                             <h5>Registro de Cultivos</h5>
                             <p class="card-text">Vegetales, Frutas y/o Arboles</p>
                             <a th:href="@{/cultivo/registrar}" class="btn btn-success">Ingresar</a>
-                            <a th:href="@{/cultivo/lista}" class="btn btn-info">Lista</a>
+                            <a th:href="@{/cultivo/lista}" class="btn btn-info" sec:authorize="hasRole('GUEST')">Lista</a>
+                            <a th:href="@{/admin/listacultivos}" class="btn btn-info" sec:authorize="hasRole('ADMIN')">Lista</a>
                         </div>
                     </div>
                 </div>
