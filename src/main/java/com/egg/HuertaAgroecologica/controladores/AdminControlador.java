@@ -39,37 +39,38 @@ public class AdminControlador {
     }
    
    @GetMapping("/lista")
-   public String lista(ModelMap modelo){
+   public String lista(ModelMap modelo, HttpSession session){
+       Usuario logueado = (Usuario) session.getAttribute("usuariosession");
        List<Usuario> usuarios = usuarioServicio.listarUsuarios();
+       modelo.addAttribute("adminActual", logueado);
        modelo.addAttribute("usuarios", usuarios);
        return "usuario-list";
    }
  
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/baja/{id}")
-    public String baja(@PathVariable String id) {
+    @GetMapping("/guest/{id}")
+    public String guest(@PathVariable String id) {
         try {
-            usuarioServicio.baja(id);
-            return "redirect:/lista";
+            usuarioServicio.guest(id);
+            return "redirect:/admin/lista";
         } catch (Exception e) {
-            return "redirect:/lista";
+            return "redirect:/admin/lista";
         }
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/alta/{id}")
-    public String alta(@PathVariable String id) {
+    @GetMapping("/admin/{id}")
+    public String admin(@PathVariable String id) {
         try {
-            usuarioServicio.alta(id);
-            return "redirect:/lista";
+            usuarioServicio.admin(id);
+            return "redirect:/admin/lista";
         } catch (Exception e) {
-            return "redirect:/lista";
+            return "redirect:/admin/lista";
         }
     }
     
     @GetMapping("/listacultivos")
-    public String listar(ModelMap modelo, HttpSession session) {
-        
+    public String listar(ModelMap modelo) {       
        
         List<Cultivo> cultivos = cultivoServicio.listarCultivos();
         modelo.addAttribute("cultivos", cultivos);

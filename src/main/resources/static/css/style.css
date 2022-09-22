@@ -1,8 +1,16 @@
 * {
     box-sizing: border-box;
 }
-
-
+img{
+  max-width: 150px;
+}
+.logo{
+    float: right;
+    margin-right: 15rem;
+}
+.topnav{
+    margin: 20px;
+}
 .container {
     margin-top: auto;
     padding: 100px;

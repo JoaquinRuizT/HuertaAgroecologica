@@ -10,7 +10,8 @@ body, html {
   .bg-img {
     /* The image used */
     background-image: url("/img/jardineria2.jpg");
-  
+    margin: 0.5rem;
+    
   /* Control the height of the image */
   min-height: 180%; 
   
