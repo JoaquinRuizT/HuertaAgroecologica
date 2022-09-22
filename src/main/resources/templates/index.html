@@ -1,113 +1,132 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Inicio</title>
-  <link rel="stylesheet" href="/css/estilo.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Inicio</title>
+        <link rel="stylesheet" href="/css/estilo.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    </head>
 
-<body>
-  <header th:replace="plantilla/template :: header">
-    
-  </header>
-  <div class="contenedor">
-    <img src="/img/portadadeinicio.png" alt="">
-  </div>
-  <div class="container mt-5">
-    <div class="row">
+    <body>
+        <header th:replace="plantilla/template :: header">
 
-      <div class="col-lg-3">
-        <div class="card">
-          <img src="/img/cultivos.png" alt="logo" class="card-img-top">
-          <div class="card-body">
-            <h5>Registro de Cultivos</h5>
-            <p class="card-text">Vegetales, Frutas y/o Arboles</p>
-            <a th:href="@{/cultivo/registrar}" class="btn btn-success">Ingresar</a>
-            <a th:href="@{/cultivo/lista}" class="btn btn-info">Lista</a>
-          </div>
+        </header>
+        <div class="contenedor">
+            <img src="/img/portadadeinicio.png" alt="">
         </div>
-      </div>
-      <div class="col-lg-3">
-        <div class="card">
-          <img src="/img/frutas.png" alt="logo" class="card-img-top">
-          <div class="card-body">
-            <h5>Frutas</h5>
-            <p class="card-text">Lista de Frutas disponibles</p>
-            <a th:href="@{/cultivo/frutas}" class="btn btn-success">Lista</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3">
-        <div class="card">
-          <img src="/img/vegetales.png" alt="logo" class="card-img-top">
-          <div class="card-body">
-            <h5>Vegetales</h5>
-            <p class="card-text">Lista de Vegetales disponibles</p>
-            <a th:href="@{/cultivo/verduras}" class="btn btn-success">Lista</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3">
-          
-        <div class="card">
-          <img src="/img/negocio.svg" alt="logo" class="card-img-top">
-          <div class="card-body">
-            <h5>Comercialización</h5>
-            <p class="card-text">Visualice la data de sus productos y oportunidades de negocio</p>
-            <a th:href="@{/produccion/registrar(id=)}" class="btn btn-success">Ingresar</a>
-            <a th:href="@{/produccion/lista}" class="btn btn-info">Lista</a>
-          </div>
-        </div>
-      </div>
-        <div class="col-lg-3">
-        <div class="card">
-          <img src="/img/datos.png" alt="logo" class="card-img-top">
-          <div class="card-body">
-            <h5>Estadisticas</h5>
-            <p class="card-text">Estadisticas de Producción</p>
-            <a th:href="@{graficos/display}" class="btn btn-success">Mostrar</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+        <div class="container mt-5">
+            <div class="row">
 
-  
-  <!--Footer-->
-  <div class="container">
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-      <p class="col-md-4 mb-0 text-muted">&copy; 2022 Company, Inc</p>
+                <div class="col-lg-3">
+                    <div class="card">
+                        <img src="/img/cultivos.png" alt="logo" class="card-img-top">
+                        <div class="card-body">
+                            <h5>Registro de Cultivos</h5>
+                            <p class="card-text">Vegetales, Frutas y/o Arboles</p>
+                            <a th:href="@{/cultivo/registrar}" class="btn btn-success">Ingresar</a>
+                            <a th:href="@{/cultivo/lista}" class="btn btn-info">Lista</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card">
+                        <img src="/img/garden3.png" alt="logo" class="card-img-top">
+                        <div class="card-body">
+                            <h5>Registro de Huertas</h5>
+                            <p class="card-text">Todas las huertas que posees</p>
+                            <a th:href="@{/huerta/registrar}" class="btn btn-success">Ingresar</a>
+                            <a th:href="@{/huerta/lista}" class="btn btn-info">Lista</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card">
+                        <img src="/img/frutas.png" alt="logo" class="card-img-top">
+                        <div class="card-body">
+                            <h5>Frutas</h5>
+                            <p class="card-text">Lista de Frutas disponibles</p>
+                            <a th:href="@{/cultivo/frutas}" class="btn btn-success">Lista</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card">
+                        <img src="/img/vegetales.png" alt="logo" class="card-img-top">
+                        <div class="card-body">
+                            <h5>Vegetales</h5>
+                            <p class="card-text">Lista de Vegetales disponibles</p>
+                            <a th:href="@{/cultivo/verduras}" class="btn btn-success">Lista</a>
+                        </div>
+                    </div>
+                </div>
 
-      <a href="/"
-        class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-        <svg class="bi me-2" width="40" height="32">
-          <use xlink:href="#bootstrap" />
-        </svg>
-      </a>
+                
 
-      <ul class="nav col-md-4 justify-content-end">
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
-      </ul>
-    </footer>
-  </div>
+            </div>
+        </div>
+        
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-3">
 
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
-    integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
-    integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-    crossorigin="anonymous"></script>
-</body>
+                    <div class="card">
+                        <img src="/img/negocio.svg" alt="logo" class="card-img-top">
+                        <div class="card-body">
+                            <h5>Comercialización</h5>
+                            <p class="card-text">Producción de cultivos</p>
+                            <a th:href="@{/produccion/registrar(id=)}" class="btn btn-success">Ingresar</a>
+                            <a th:href="@{/produccion/lista}" class="btn btn-info">Lista</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card">
+                        <img src="/img/data2.png" alt="logo" class="card-img-top">
+                        <div class="card-body">
+                            <h5>Estadisticas</h5>
+                            <p class="card-text">Estadisticas de Producción</p>
+                            <a th:href="@{graficos/display}" class="btn btn-success">Mostrar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--Footer-->
+        <div class="container">
+            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                <p class="col-md-4 mb-0 text-muted">&copy; 2022 Company, Inc</p>
+
+                <a href="/"
+                   class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32">
+                    <use xlink:href="#bootstrap" />
+                    </svg>
+                </a>
+
+                <ul class="nav col-md-4 justify-content-end">
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+                </ul>
+            </footer>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+                integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
+                integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+    </body>
 
 </html>

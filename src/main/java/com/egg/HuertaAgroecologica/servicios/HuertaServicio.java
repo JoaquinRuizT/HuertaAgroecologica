@@ -11,6 +11,7 @@ import com.egg.HuertaAgroecologica.entidades.Usuario;
 import com.egg.HuertaAgroecologica.excepciones.MiExcepcion;
 import com.egg.HuertaAgroecologica.repositorios.CultivoRepositorio;
 import com.egg.HuertaAgroecologica.repositorios.HuertaRepositorio;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -62,17 +63,21 @@ public class HuertaServicio {
     }
     
     @Transactional
-    public void modificarHuerta(String nombre, String idCultivo, Usuario usuario) throws MiExcepcion {
+    public void modificarHuerta(String idHuerta, String nombre, String idCultivo, Usuario usuario) throws MiExcepcion {
         Optional<String> respuesta = Optional.ofNullable(idCultivo);
         if (respuesta.isPresent()) {
             Cultivo cultivo = cultivoRepositorio.getOne(idCultivo);
-            Huerta huerta = new Huerta();
-            huerta.setEditado(new Date());
-            huerta.setNombre(nombre);
-            huerta.setUsuario(usuario);
-            huerta.setCultivos(cultivo);
-            huerta.setActivo(2);
-            huertaRepositorio.save(huerta);
+            Optional<Huerta> respuestaHuerta = huertaRepositorio.findById(idHuerta);
+            if (respuestaHuerta.isPresent()) {
+                Huerta huerta = respuestaHuerta.get();
+                huerta.setEditado(new Date());
+                huerta.setNombre(nombre);
+                huerta.setUsuario(usuario);
+                huerta.setCultivos(cultivo);
+                huerta.setActivo(2);
+                huertaRepositorio.save(huerta);
+            }
+            
         }
     }
     
@@ -102,4 +107,9 @@ public class HuertaServicio {
         entidad.setActivo(2);
     }
     
+    public List<Huerta> buscarHuertasPorUsuario(String idUsuario) {
+        List<Huerta> huertas = new ArrayList();
+        huertas = huertaRepositorio.buscarHuertaPorUsuario(idUsuario);
+        return huertas;
+    }
 }
