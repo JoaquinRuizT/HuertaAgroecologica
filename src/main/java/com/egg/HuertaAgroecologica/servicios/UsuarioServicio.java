@@ -172,5 +172,19 @@ public class UsuarioServicio implements UserDetailsService {
         entidadUsuario.setActivo(false);
         return usuarioRepositorio.save(entidadUsuario);
     }
+    
+    @Transactional
+    public Usuario admin(String id) throws Exception{
+        Usuario entidadUsuario = usuarioRepositorio.getOne(id);
+        entidadUsuario.setRol(Rol.ADMIN);
+        return usuarioRepositorio.save(entidadUsuario);
+    }
+    
+    @Transactional
+    public Usuario guest(String id) throws Exception{
+        Usuario entidadUsuario = usuarioRepositorio.getOne(id);
+        entidadUsuario.setRol(Rol.GUEST);
+        return usuarioRepositorio.save(entidadUsuario);
+    }
 
 }

@@ -27,7 +27,7 @@
                         <th scope="col">Email</th>
                         <th scope="col">Creado</th>
                         <th scope="col">Editado</th>
-                        <th scope="col">Estado <button type="button" class="btn btn-success" data-bs-trigger="hover focus" data-bs-toggle="popover" title="Estado de publicación" data-bs-content="Verde: activo <br><br> Rojo: inactivo" data-bs-html="true" >?</button></th>
+                        <th scope="col">Rol</th>
                         <th scope="col" sec:authorize="hasRole('ADMIN')">Acción</th>
 
                     </tr>
@@ -38,16 +38,13 @@
                         <th th:text="${usuario.email}"></th>
                         <td th:text="${usuario.creado}"></td>
                         <th th:text="${usuario.editado}"></th>
+                        <th th:text="${usuario.rol}"></th>
                         
                         
                         <td>
-                            <i th:if="${usuario.activo}" class="fa fa-circle text-success"></i>
-                            <i th:unless="${usuario.activo}" class="fa fa-circle" style="color:red;"></i>
-                        </td>
-                        <td>
-                            <a th:href="@{/admin/modificar/__${usuario.id}__}" class="btn btn-warning" sec:authorize="hasRole('ADMIN')" >Modificar</a>
-                            <a th:href="@{/admin/alta/__${usuario.id}__}" sec:authorize="hasRole('ADMIN')"><i class="fa fa-arrow-up"></i>Alta</a> 
-                            <a th:href="@{/admin/baja/__${usuario.id}__}" sec:authorize="hasRole('ADMIN')"><i class="fa fa-ban"></i>Baja</a>
+                            <!--<a th:href="@{/admin/modificar/__${usuario.id}__}" class="btn btn-warning" sec:authorize="hasRole('ADMIN')" >Modificar</a>-->
+                            <a th:if="${usuario.id != adminActual.id}" th:href="@{/admin/admin/__${usuario.id}__}" sec:authorize="hasRole('ADMIN')"><i class="fa fa-arrow-up"></i>Administrador</a> 
+                            <a th:if="${usuario.id != adminActual.id}" th:href="@{/admin/guest/__${usuario.id}__}" sec:authorize="hasRole('ADMIN')"><i class="fa fa-arrow-down"></i>Usuario</a>
                         </td>
                     </tr>
 
