@@ -9,6 +9,7 @@
    background-color: rgb(74, 96, 81);
    box-shadow: 0 0 0.5rem  rgb(83 78 76 / 50%);
    overflow: auto;
+   align-items: center;
 }
 
 .topnav a {
@@ -180,7 +181,8 @@ img {
 .logo{
    width: auto;
    display: inline-block;
-   margin: 0.5rem;
+   margin: 1rem;
+   align-content: center;
 }
 .logo img{
     image: url("/img/logohuerta.jpg");
@@ -190,7 +192,7 @@ img {
     left: auto;
     position: relative;
     display: inline-block;
-    margin: 0.5rem 1rem 1.5rem 1rem;
+    margin: 2rem 1rem 1.5rem 1rem;
     float: right;
 }
 
@@ -200,8 +202,9 @@ img {
 .menu li{
     float: left;
     font-weight: 700;
+    font-size: 4em;
     text-align: center;
-   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 

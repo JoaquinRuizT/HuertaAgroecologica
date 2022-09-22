@@ -5,7 +5,9 @@
  */
 package com.egg.HuertaAgroecologica.repositorios;
 
+
 import com.egg.HuertaAgroecologica.entidades.Huerta;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -20,4 +22,7 @@ public interface HuertaRepositorio extends JpaRepository<Huerta, String>{
     
     @Query("SELECT h from Huerta h WHERE h.nombre = :nombre")
     public Huerta buscarPorNombre(@Param("nombre") String nombre);
+    
+    @Query("SELECT h FROM Huerta h WHERE h.usuario.id = :id")
+    public List<Huerta> buscarHuertaPorUsuario(@Param("id") String usuarioId);
 }

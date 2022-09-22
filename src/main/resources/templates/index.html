@@ -8,15 +8,15 @@
         <link rel="stylesheet" href="/css/estilo.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+        <link rel="icon" href="img/logohuerta.ico" >
     </head>
 
     <body>
         <header th:replace="plantilla/template :: header">
+
         </header>
-        
         <main th:replace="plantilla/template :: main"> 
         </main>
-        
         <div class="container mt-5">
             <div class="row">
 
@@ -27,8 +27,18 @@
                             <h5>Registro de Cultivos</h5>
                             <p class="card-text">Vegetales, Frutas y/o Arboles</p>
                             <a th:href="@{/cultivo/registrar}" class="btn btn-success">Ingresar</a>
-                            <a th:href="@{/cultivo/lista}" class="btn btn-info" sec:authorize="hasRole('GUEST')">Lista</a>
-                            <a th:href="@{/admin/listacultivos}" class="btn btn-info" sec:authorize="hasRole('ADMIN')">Lista</a>
+                            <a th:href="@{/cultivo/lista}" class="btn btn-info">Lista</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card">
+                        <img src="/img/garden3.png" alt="logo" class="card-img-top">
+                        <div class="card-body">
+                            <h5>Registro de Huertas</h5>
+                            <p class="card-text">Todas las huertas que posees</p>
+                            <a th:href="@{/huerta/registrar}" class="btn btn-success">Ingresar</a>
+                            <a th:href="@{/huerta/lista}" class="btn btn-info">Lista</a>
                         </div>
                     </div>
                 </div>
@@ -52,13 +62,21 @@
                         </div>
                     </div>
                 </div>
+
+                
+
+            </div>
+        </div>
+        
+        <div class="container mt-5">
+            <div class="row">
                 <div class="col-lg-3">
 
                     <div class="card">
                         <img src="/img/negocio.svg" alt="logo" class="card-img-top">
                         <div class="card-body">
                             <h5>Comercialización</h5>
-                            <p class="card-text">Visualice la data de sus productos y oportunidades de negocio</p>
+                            <p class="card-text">Producción de cultivos</p>
                             <a th:href="@{/produccion/registrar(id=)}" class="btn btn-success">Ingresar</a>
                             <a th:href="@{/produccion/lista}" class="btn btn-info">Lista</a>
                         </div>
@@ -66,7 +84,7 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="card">
-                        <img src="/img/datos.png" alt="logo" class="card-img-top">
+                        <img src="/img/data2.png" alt="logo" class="card-img-top">
                         <div class="card-body">
                             <h5>Estadisticas</h5>
                             <p class="card-text">Estadisticas de Producción</p>
@@ -76,12 +94,12 @@
                 </div>
             </div>
         </div>
-      
+
 
         <!--Footer-->
         <div class="container">
             <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-                <p class="col-md-4 mb-0 text-muted">Diseñado por alumnos de Egg Cooperation | Copyright &copy; 2022</p>
+                <p class="col-md-4 mb-0 text-muted">&copy; 2022 Company, Inc</p>
 
                 <a href="/"
                    class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
@@ -91,12 +109,16 @@
                 </a>
 
                 <ul class="nav col-md-4 justify-content-end">
-                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Inicio</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Nosotros</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Contacto</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
                 </ul>
             </footer>
         </div>
+
+      
 
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
                 integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
