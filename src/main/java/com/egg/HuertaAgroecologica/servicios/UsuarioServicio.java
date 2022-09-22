@@ -32,6 +32,9 @@ public class UsuarioServicio implements UserDetailsService {
 
     @Autowired
     private FotoServicio fotoServicio;
+    
+    @Autowired
+    private MailServicio mailServicio;
 
     @Transactional
     public void registrar(MultipartFile archivo, String nombre, String email, String password, String password2) throws MiExcepcion {
@@ -54,6 +57,9 @@ public class UsuarioServicio implements UserDetailsService {
 
         //AGREGAMOS FOTO DE PERFIL A USUARIO?
         usuarioRepositorio.save(usuario);
+        
+        mailServicio.enviarMail("Bienvenidos al Blog de Huertas Agroecológicas de Misiones!", 
+                "Ya estás registrado como usuario!", usuario.getEmail());
 
     }
 
