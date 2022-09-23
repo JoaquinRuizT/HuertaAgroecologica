@@ -77,7 +77,6 @@ public class CultivoControlador{
         return "cultivo-list.html";
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/modificar/{id}")
     public String modificar(@PathVariable String id, ModelMap modelo) {
         Cultivo cultivo = cultivoServicio.getOne(id);
@@ -86,7 +85,6 @@ public class CultivoControlador{
 
     }
     
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/modificar/{id}")
     public String modificar(@PathVariable String id, @RequestParam String nombre, @RequestParam String tipoCultivo,
             @RequestParam String temperatura, @RequestParam String agua, @RequestParam String luz,

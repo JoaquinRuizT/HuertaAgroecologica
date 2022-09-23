@@ -36,7 +36,7 @@
                         <th scope="col">Observaciones</th>
                         <th scope="col">Foto</th>
                         <th scope="col">Estado <button type="button" class="btn btn-success" data-bs-trigger="hover focus" data-bs-toggle="popover" title="Estado de publicación" data-bs-content="Verde: activo <br><br> Naranja: en revisión <br><br> Rojo: inactivo" data-bs-html="true" >?</button></th>
-                        <th scope="col" sec:authorize="hasRole('ADMIN')">Acción</th>
+                        <th scope="col">Acción</th>
 
                     </tr>
 
@@ -59,7 +59,7 @@
                             <i th:if="${cultivo.estado == 2}" class="fa fa-circle" style="color:orange;"></i>
                         </td>
                         <td>
-                            <a th:href="@{/cultivo/modificar/__${cultivo.id}__}" class="btn btn-warning" sec:authorize="hasRole('ADMIN')" >Modificar</a>
+                            <a th:href="@{/cultivo/modificar/__${cultivo.id}__}" class="btn btn-warning" sec:authorize="hasRole('GUEST')">Modificar</a>
                             <a th:href="@{/cultivo/alta/__${cultivo.id}__}" sec:authorize="hasRole('ADMIN')"><i class="fa fa-arrow-up">Alta</i></a> 
                             <a th:href="@{/cultivo/baja/__${cultivo.id}__}" sec:authorize="hasRole('ADMIN')"><i class="fa fa-ban">Baja</i></a>
                         </td>

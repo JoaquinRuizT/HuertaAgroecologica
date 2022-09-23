@@ -65,6 +65,7 @@ public class CultivoServicio {
             cultivo.setTipoCultivo(tipoCultivo);
             cultivo.setTemperatura(temperatura);
             cultivo.setAgua(agua);
+            cultivo.setEstado(2);
             cultivo.setLuz(luz);
             cultivo.setSuelo(suelo);
             cultivo.setEstacion(estacion);
@@ -72,14 +73,16 @@ public class CultivoServicio {
             cultivo.setObservaciones(observaciones);
             cultivo.setFecha(new Date());
 
-            String idFoto = null;
+            if (!archivo.isEmpty()) {
+                String idFoto = null;
 
-            if (cultivo.getImagenCultivo() != null) {
-                idFoto = cultivo.getImagenCultivo().getId();
+                if (cultivo.getImagenCultivo() != null) {
+                    idFoto = cultivo.getImagenCultivo().getId();
+                }
+
+                Foto foto = fotoServicio.actualizar(idFoto, archivo);
+                cultivo.setImagenCultivo(foto);
             }
-
-            Foto foto = fotoServicio.actualizar(idFoto, archivo);
-            cultivo.setImagenCultivo(foto);
 
             cultivoRepositorio.save(cultivo);
         }
@@ -147,7 +150,7 @@ public class CultivoServicio {
 
     public void validarCultivo(double temperatura) throws MiExcepcion {
 
-        if(temperatura < 0.0d || temperatura > 40.0d){
+        if (temperatura < 0.0d || temperatura > 40.0d) {
             throw new MiExcepcion("No es una temperatura válida");
         }
     }

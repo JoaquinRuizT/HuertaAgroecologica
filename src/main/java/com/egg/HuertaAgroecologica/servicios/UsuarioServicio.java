@@ -91,7 +91,6 @@ public class UsuarioServicio implements UserDetailsService {
         Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
         if (respuesta.isPresent()) {
             Usuario usuario = respuesta.get();
-            usuario.setEmail(email);
             usuario.setNombre(nombre);
             usuario.setPassword(password);
             usuario.setEditado(new Date());
