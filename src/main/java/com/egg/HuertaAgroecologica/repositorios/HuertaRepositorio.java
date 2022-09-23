@@ -21,7 +21,7 @@ import org.springframework.stereotype.Repository;
 public interface HuertaRepositorio extends JpaRepository<Huerta, String>{
     
     @Query("SELECT h from Huerta h WHERE h.nombre = :nombre")
-    public Huerta buscarPorNombre(@Param("nombre") String nombre);
+    public List<Huerta> buscarPorNombre(@Param("nombre") String nombre);
     
     @Query("SELECT h FROM Huerta h WHERE h.usuario.id = :id")
     public List<Huerta> buscarHuertaPorUsuario(@Param("id") String usuarioId);

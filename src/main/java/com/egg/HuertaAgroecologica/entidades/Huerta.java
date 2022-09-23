@@ -56,5 +56,8 @@ public class Huerta {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Usuario usuario;
     
-    private Integer activo;
+    
+    private Double porcentajeDeConfiabilidad;
+    
+    
 }

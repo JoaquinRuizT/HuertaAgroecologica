@@ -106,8 +106,35 @@ public class HuertaControlador {
             return "redirect:/login";
         }
         List<Huerta> huertas = huertaServicio.buscarHuertasPorUsuario(logueado.getId());
+        System.out.println("por aqui");
+        huertaServicio.entregaDeHuertas(huertas);
         modelo.addAttribute("huertas", huertas);
+        
         return "huerta-list.html";
     }
     
+    
+    
+    
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_GUEST')")
+    @PostMapping("/busquedahuerta")
+    public String busquedahuerta(ModelMap modelo, HttpSession session, String nombre) {
+        Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+        if (logueado == null) {
+            return "redirect:/login";
+        }
+
+        List<Huerta> huertas = huertaServicio.buscarHuertasPorNombre(nombre);
+        
+        if (huertas.isEmpty()) {
+            modelo.put("error", "¡Huerta No encontrada");
+            return "huerta-list.html";
+        } else {
+            modelo.addAttribute("huertas", huertas);
+            modelo.put("exito", "¡Huerta encontrada correctamente!");
+            return "huerta-list.html";
+        }
+
+
+    }
 }

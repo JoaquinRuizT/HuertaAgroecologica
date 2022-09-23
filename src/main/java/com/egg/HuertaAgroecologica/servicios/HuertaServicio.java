@@ -57,7 +57,12 @@ public class HuertaServicio {
             huerta.setNombre(nombre);
             huerta.setUsuario(usuario);
             huerta.setCultivos(cultivo);
-            huerta.setActivo(2);
+            if (cultivo.getEstado() == 1) {
+                huerta.setPorcentajeDeConfiabilidad(0.0d);
+            }else{
+                huerta.setPorcentajeDeConfiabilidad(0.0d);
+            }
+            
             huertaRepositorio.save(huerta);
         }
     }
@@ -74,7 +79,7 @@ public class HuertaServicio {
                 huerta.setNombre(nombre);
                 huerta.setUsuario(usuario);
                 huerta.setCultivos(cultivo);
-                huerta.setActivo(2);
+                huerta.setPorcentajeDeConfiabilidad(0.0d);
                 huertaRepositorio.save(huerta);
             }
             
@@ -92,24 +97,42 @@ public class HuertaServicio {
         return huertaRepositorio.getOne(id);
     }
     
-    public void alta(String id){
-        Huerta entidad = buscarPorId(id);
-        entidad.setActivo(3);
-    }
-    
-    public void baja(String id){
-        Huerta entidad = buscarPorId(id);
-        entidad.setActivo(1);
-    }
-    
-    public void revision(String id){
-        Huerta entidad = buscarPorId(id);
-        entidad.setActivo(2);
-    }
+   
     
     public List<Huerta> buscarHuertasPorUsuario(String idUsuario) {
         List<Huerta> huertas = new ArrayList();
         huertas = huertaRepositorio.buscarHuertaPorUsuario(idUsuario);
         return huertas;
+    }
+    
+    public List<Huerta> buscarHuertasPorNombre(String nombre) {
+        List<Huerta> huertas = new ArrayList();
+        huertas = huertaRepositorio.buscarPorNombre(nombre);
+        return huertas;
+    }
+    
+    
+    public void entregaDeHuertas(List<Huerta> listica){
+        for (Huerta huerta : listica) {
+            huerta.setPorcentajeDeConfiabilidad(calcularConfiabilidad(huerta.getNombre()));
+            System.out.println(calcularConfiabilidad(huerta.getNombre()));
+            huertaRepositorio.save(huerta);
+        }
+        
+    }
+    
+    public Double calcularConfiabilidad(String nombre) {
+        List<Huerta> huertas = huertaRepositorio.buscarPorNombre(nombre);
+        System.out.println(huertas);
+        Double acum = 0.0d;
+        for (Huerta huerta : huertas) {
+            if (huerta.getCultivos().getEstado() == 1) {
+                
+                acum = acum + 1.0d;
+                System.out.println("acum" + acum);
+            }
+        }
+        System.out.println(100/huertas.size()*acum);
+        return (100/huertas.size()*acum);
     }
 }
