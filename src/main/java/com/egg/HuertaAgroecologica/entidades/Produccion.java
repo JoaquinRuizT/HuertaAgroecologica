@@ -7,10 +7,13 @@ package com.egg.HuertaAgroecologica.entidades;
 
 
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -36,16 +39,22 @@ public class Produccion {
     @JoinColumn(name = "cultivo_id")
     private Cultivo cultivo;
 
+    
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Usuario usuario;
+    
+    
     public Produccion() {
     }
 
-    public Produccion(String id, Double cantidad, String mes, Integer year, boolean alta, Cultivo cultivo) {
+    public Produccion(String id, Double cantidad, String mes, Integer year, boolean alta, Cultivo cultivo, Usuario usuario) {
         this.id = id;
         this.cantidad = cantidad;
         this.mes = mes;
         this.year = year;
         this.alta = alta;
         this.cultivo = cultivo;
+        this.usuario = usuario;
     }
 
     public String getId() {
@@ -96,6 +105,15 @@ public class Produccion {
         this.cultivo = cultivo;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    
     
     
 }

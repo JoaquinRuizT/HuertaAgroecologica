@@ -7,6 +7,7 @@ package com.egg.HuertaAgroecologica.servicios;
 
 import com.egg.HuertaAgroecologica.entidades.Cultivo;
 import com.egg.HuertaAgroecologica.entidades.Produccion;
+import com.egg.HuertaAgroecologica.entidades.Usuario;
 import com.egg.HuertaAgroecologica.excepciones.MiExcepcion;
 import com.egg.HuertaAgroecologica.repositorios.CultivoRepositorio;
 import com.egg.HuertaAgroecologica.repositorios.ProduccionRepositorio;
@@ -32,10 +33,12 @@ public class ProduccionServicio {
     private CultivoRepositorio cultivoRepositorio;
     
     @Transactional
-    public void crearProduccion(String cantidad, String mes, String year, String idCultivo) throws MiExcepcion {
+    public void crearProduccion(String cantidad, String mes, String year, String idCultivo, Usuario usuario) throws MiExcepcion {
         /*Validar*/
+       
         Double cantidadDecimal = Double.parseDouble(cantidad);
         Integer yearEntero = Integer.parseInt(year);
+        
         Produccion produccion = new Produccion();
         validar(cantidadDecimal, yearEntero);
         Optional<String> respuesta = Optional.ofNullable(idCultivo);
@@ -46,9 +49,38 @@ public class ProduccionServicio {
             produccion.setMes(mes);
             produccion.setAlta(true);
             produccion.setYear(yearEntero);
+            produccion.setUsuario(usuario);
             produccionRepositorio.save(produccion);
         }
         
+    }
+    
+    
+    public void modificarProduccion(String idProduccion, String cantidad, String mes, String year, String idCultivo, Usuario usuario) throws MiExcepcion {
+        Double cantidadDecimal = Double.parseDouble(cantidad);
+        Integer yearEntero = Integer.parseInt(year);
+        validar(cantidadDecimal, yearEntero);
+        Optional<Produccion> respuesta = produccionRepositorio.findById(idProduccion);
+        if (respuesta.isPresent()) {
+            Optional<String> respuestaCultivo = Optional.ofNullable(idCultivo);
+            if (respuestaCultivo.isPresent()) {
+                Cultivo cultivo = cultivoRepositorio.getOne(idCultivo);
+                Produccion produccion = new Produccion();
+                produccion.setCultivo(cultivo);
+                produccion.setCantidad(cantidadDecimal);
+                produccion.setMes(mes);
+                produccion.setYear(yearEntero);
+                produccion.setAlta(true);
+                produccion.setUsuario(usuario);
+                produccionRepositorio.save(produccion);
+            }
+            
+        }
+    }
+    
+    @Transactional(readOnly = true)
+    public Produccion buscarPorId(String id) {
+        return produccionRepositorio.getOne(id);
     }
     
     
@@ -155,7 +187,7 @@ public class ProduccionServicio {
         
         Date fechaActual = new Date();
         
-        if(year < 1970 || year > fechaActual.getYear()){
+        if(year < 1970 || year < 0 || year > (fechaActual.getYear() + 1900)){
             throw new MiExcepcion("Debes colocar un año válido");
         }
     }
