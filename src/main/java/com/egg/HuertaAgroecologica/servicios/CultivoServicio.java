@@ -31,7 +31,7 @@ public class CultivoServicio {
     @Transactional
     public void crearCultivo(String nombre, String tipoCultivo, double temperatura, String agua, String luz, String suelo, String estacion, String viento, String observaciones, MultipartFile archivo, Usuario usuario) throws MiExcepcion {
 
-        validarCultivo(temperatura);
+        validarCultivo(temperatura, suelo);
         Cultivo cultivo = new Cultivo();
 
         cultivo.setNombre(nombre);
@@ -148,8 +148,10 @@ public class CultivoServicio {
         cultivoRepositorio.save(entidad);
     }
 
-    public void validarCultivo(double temperatura) throws MiExcepcion {
-
+    public void validarCultivo(double temperatura, String suelo) throws MiExcepcion {
+        if (suelo.isEmpty() || suelo == null) {
+            throw new MiExcepcion("El suelo no puede estar vacio o nulo");
+        }
         if (temperatura < 0.0d || temperatura > 40.0d) {
             throw new MiExcepcion("No es una temperatura válida");
         }

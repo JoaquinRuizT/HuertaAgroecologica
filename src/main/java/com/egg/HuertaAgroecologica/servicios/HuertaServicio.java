@@ -32,23 +32,11 @@ public class HuertaServicio {
     @Autowired
     private CultivoRepositorio cultivoRepositorio;
     
-    /*private String id;
-    private String nombre;
-    
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date creado;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date editado;
-    
-    @OneToOne
-    private List<Cultivo> cultivos;
-    
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Usuario usuario;*/
+   
     
     @Transactional
     public void guardarHuerta(String nombre, String idCultivo, Usuario usuario) throws MiExcepcion {
+        validar(nombre);
         Optional<String> respuesta = Optional.ofNullable(idCultivo);
         if (respuesta.isPresent()) {
             Cultivo cultivo = cultivoRepositorio.getOne(idCultivo);
@@ -134,5 +122,13 @@ public class HuertaServicio {
         }
         System.out.println(100/huertas.size()*acum);
         return (100/huertas.size()*acum);
+    }
+    
+    
+    public void validar(String nombre) throws MiExcepcion {
+        if (nombre.isEmpty() || nombre == null) {
+            throw new MiExcepcion("El nombre no puede ser nulo o vacio");
+        }
+        
     }
 }
