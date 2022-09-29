@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpSession;
-import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,6 +20,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
@@ -58,8 +59,8 @@ public class UsuarioServicio implements UserDetailsService {
         //AGREGAMOS FOTO DE PERFIL A USUARIO?
         usuarioRepositorio.save(usuario);
         
-        mailServicio.enviarMail("Bienvenidos al Blog de Huertas Agroecológicas de Misiones!", 
-                "Ya estás registrado como usuario!", usuario.getEmail());
+        // mailServicio.enviarMail("Bienvenidos al Blog de Huertas Agroecológicas de Misiones!", 
+          //      "Ya estás registrado como usuario!", usuario.getEmail());
 
     }
 

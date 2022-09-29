@@ -111,7 +111,7 @@ public class ProduccionControlador {
     }
     
     
-    
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_GUEST')")
     @GetMapping("/baja/{id}")
     public String baja(ModelMap modelo, @PathVariable String id) {
 
@@ -124,6 +124,7 @@ public class ProduccionControlador {
 
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_GUEST')")
     @GetMapping("/alta/{id}")
     public String alta(ModelMap modelo, @PathVariable String id) {
 

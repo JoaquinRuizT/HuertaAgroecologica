@@ -6,8 +6,12 @@
 package com.egg.HuertaAgroecologica.controladores;
 
 import com.egg.HuertaAgroecologica.entidades.Cultivo;
+import com.egg.HuertaAgroecologica.entidades.Huerta;
+import com.egg.HuertaAgroecologica.entidades.Produccion;
 import com.egg.HuertaAgroecologica.entidades.Usuario;
 import com.egg.HuertaAgroecologica.servicios.CultivoServicio;
+import com.egg.HuertaAgroecologica.servicios.HuertaServicio;
+import com.egg.HuertaAgroecologica.servicios.ProduccionServicio;
 import com.egg.HuertaAgroecologica.servicios.UsuarioServicio;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -32,12 +36,19 @@ public class AdminControlador {
     
     @Autowired
     private CultivoServicio cultivoServicio;
+    
+    @Autowired
+    private HuertaServicio huertaServicio;
+    
+    @Autowired
+    private ProduccionServicio produccionServicio;
 
     @GetMapping("/dashboard")
     public String panelAdministrativo() {
         return "index.html";
     }
    
+   @PreAuthorize("hasRole('ROLE_ADMIN')")
    @GetMapping("/lista")
    public String lista(ModelMap modelo, HttpSession session){
        Usuario logueado = (Usuario) session.getAttribute("usuariosession");
@@ -69,12 +80,64 @@ public class AdminControlador {
         }
     }
     
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/listacultivos")
     public String listar(ModelMap modelo) {       
        
         List<Cultivo> cultivos = cultivoServicio.listarCultivos();
         modelo.addAttribute("cultivos", cultivos);
         return "cultivo-list.html";
+    }
+    
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/listahuertas")
+    public String listarhuertas(ModelMap modelo) {       
+       
+        List<Huerta> huertas = huertaServicio.listarTodasLasHuertas();
+        modelo.addAttribute("huertas", huertas);
+        return "huerta-list.html";
+    }
+    
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/frutas")
+    public String listarFrutas(ModelMap modelo) {
+        List<Cultivo> cultivos = cultivoServicio.listarFrutas();
+        modelo.addAttribute("cultivos", cultivos);
+        return "cultivo-list.html";
+    }
+    
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/verduras")
+    public String listarVerduras(ModelMap modelo) {
+        List<Cultivo> cultivos = cultivoServicio.listarVegetales();
+        modelo.addAttribute("cultivos", cultivos);
+        return "cultivo-list.html";
+    }
+    
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_GUEST')")
+    @GetMapping("/listaproduccion")
+    public String listarproduccion(ModelMap modelo, HttpSession session) {
+        Usuario logueado = (Usuario) session.getAttribute("usuariosession");
+        if (logueado == null) {
+            return "redirect:/login";
+        }
+        List<Produccion> producciones = produccionServicio.listarTodos();
+        modelo.addAttribute("producciones", producciones);
+        return "produccion-list.html";
+    }
+    
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_GUEST')")
+    @GetMapping("display")
+    public String barGraph(ModelMap modelo) {
+        List<String> listaNombres = produccionServicio.listarProductosPorNombre();
+        List<Double> listaCantidad = produccionServicio.listarProductosPorCantidad();
+        List<String> listaMeses = produccionServicio.listarMesesDeProducto();
+        double[] vectorPorcentajes = produccionServicio.listarPorCantidadesDeCultivo();
+        modelo.addAttribute("listaNombres", listaNombres);
+        modelo.addAttribute("listaMeses", listaMeses);
+        modelo.addAttribute("listaCantidad", listaCantidad);
+        modelo.addAttribute("vectorPorcentajes", vectorPorcentajes);
+        return "dashboard";
     }
    
 }

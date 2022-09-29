@@ -97,7 +97,7 @@ public class HuertaControlador {
     
     
     
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_GUEST')")
+    @PreAuthorize("hasAnyRole('ROLE_GUEST', 'ROLE_ADMIN')")
     @GetMapping("/lista")
     public String listar(ModelMap modelo, HttpSession session) {
         

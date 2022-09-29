@@ -63,6 +63,7 @@ public class CultivoControlador{
         return "cultivo-list.html";
     }
     
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_GUEST')")
     @GetMapping("/frutas")
     public String listarFrutas(ModelMap modelo) {
         List<Cultivo> cultivos = cultivoServicio.listarFrutas();
@@ -70,6 +71,7 @@ public class CultivoControlador{
         return "cultivo-list.html";
     }
     
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_GUEST')")
     @GetMapping("/verduras")
     public String listarVerduras(ModelMap modelo) {
         List<Cultivo> cultivos = cultivoServicio.listarVegetales();

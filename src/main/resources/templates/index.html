@@ -39,7 +39,8 @@
                             <h5>Registro de Huertas</h5>
                             <p class="card-text">Todas las huertas que posees</p>
                             <a th:href="@{/huerta/registrar}" class="btn btn-success">Ingresar</a>
-                            <a th:href="@{/huerta/lista}" class="btn btn-info">Lista</a>
+                            <a th:href="@{/admin/listahuertas}" class="btn btn-info" sec:authorize="hasRole('ADMIN')">Lista</a>
+                            <a th:href="@{/huerta/lista}" class="btn btn-info" sec:authorize="hasRole('GUEST')">Lista</a>
                         </div>
                     </div>
                 </div>
@@ -49,7 +50,8 @@
                         <div class="card-body">
                             <h5>Frutas</h5>
                             <p class="card-text">Lista de Frutas disponibles</p>
-                            <a th:href="@{/cultivo/frutas}" class="btn btn-success">Lista</a>
+                            <a th:href="@{/admin/frutas}" class="btn btn-success" sec:authorize="hasRole('ADMIN')">Lista</a>
+                            <a th:href="@{/cultivo/frutas}" class="btn btn-success" sec:authorize="hasRole('GUEST')">Lista</a>
                         </div>
                     </div>
                 </div>
@@ -59,7 +61,8 @@
                         <div class="card-body">
                             <h5>Vegetales</h5>
                             <p class="card-text">Lista de Vegetales disponibles</p>
-                            <a th:href="@{/cultivo/verduras}" class="btn btn-success">Lista</a>
+                            <a th:href="@{/admin/verduras}" class="btn btn-success" sec:authorize="hasRole('ADMIN')">Lista</a>
+                            <a th:href="@{/cultivo/verduras}" class="btn btn-success" sec:authorize="hasRole('GUEST')">Lista</a>
                         </div>
                     </div>
                 </div>
@@ -78,8 +81,9 @@
                         <div class="card-body">
                             <h5>Comercialización</h5>
                             <p class="card-text">Producción de cultivos</p>
-                            <a th:href="@{/produccion/registrar(id=)}" class="btn btn-success">Ingresar</a>
-                            <a th:href="@{/produccion/lista}" class="btn btn-info">Lista</a>
+                            <a th:href="@{/produccion/registrar}" class="btn btn-success">Ingresar</a>
+                            <a th:href="@{/admin/listaproduccion}" class="btn btn-info" sec:authorize="hasRole('ADMIN')">Lista</a>
+                            <a th:href="@{/produccion/lista}" class="btn btn-info" sec:authorize="hasRole('GUEST')">Lista</a>
                         </div>
                     </div>
                 </div>
@@ -89,7 +93,8 @@
                         <div class="card-body">
                             <h5>Estadisticas</h5>
                             <p class="card-text">Estadisticas de Producción</p>
-                            <a th:href="@{graficos/display}" class="btn btn-success">Mostrar</a>
+                            <a th:href="@{/admin/display}" class="btn btn-success" sec:authorize="hasRole('ADMIN')">Mostrar</a>
+                            <a th:href="@{/graficos/display}" class="btn btn-success" sec:authorize="hasRole('GUEST')">Mostrar</a>
                         </div>
                     </div>
                 </div>
