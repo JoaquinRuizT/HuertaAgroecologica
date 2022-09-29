@@ -172,8 +172,7 @@ form .fields .input-field {
 img {
     margin: 0;
     max-width: 100%;
-    min-height: 10px;3
-    
+    min-height: 10px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -208,4 +207,4 @@ img {
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-
+  

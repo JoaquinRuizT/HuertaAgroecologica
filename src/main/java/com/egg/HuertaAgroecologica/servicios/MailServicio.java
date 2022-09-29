@@ -32,5 +32,15 @@ public class MailServicio {
         
         
     }
-    
-}
+    @Async
+    public void recibirComentario (String from, String to, String comentario){
+         SimpleMailMessage mensaje= new SimpleMailMessage();
+         mensaje.setTo(to);
+         mensaje.setFrom(from);
+         mensaje.setSubject("Comentario");
+         mensaje.setText(comentario);
+         
+         mailSender.send(mensaje);
+    }
+    }
+  
