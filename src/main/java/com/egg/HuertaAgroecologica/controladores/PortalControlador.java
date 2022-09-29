@@ -7,6 +7,7 @@ package com.egg.HuertaAgroecologica.controladores;
 
 import com.egg.HuertaAgroecologica.entidades.Usuario;
 import com.egg.HuertaAgroecologica.excepciones.MiExcepcion;
+import com.egg.HuertaAgroecologica.servicios.MailServicio;
 import com.egg.HuertaAgroecologica.servicios.UsuarioServicio;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class PortalControlador { //localhost:8080/??
 
     @Autowired
     private UsuarioServicio usuarioServicio;
+    
+    @Autowired
+    private MailServicio mailServicio;
 
     @GetMapping("/")
     public String login() {
@@ -57,7 +61,7 @@ public class PortalControlador { //localhost:8080/??
             usuarioServicio.registrar(archivo, nombre, email, password, password2);
 
             modelo.put("exito", "Usuario registrado correctamente!");
-            
+
             return "login.html";
         } catch (MiExcepcion e) {
             modelo.put("error", e.getMessage());
@@ -92,5 +96,18 @@ public class PortalControlador { //localhost:8080/??
 
         return "index.html";
     }
-    
+
+    @GetMapping("/contact")
+    public String contacto() {
+        return "contacto.html";
+    }
+    @PostMapping("/enviarMail")//esto se conecta con el action del form
+    public String sendMail(@RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido, @RequestParam("email") String email,@RequestParam("comentarios") String comentarios,ModelMap modelo){
+        String mensaje =  "\n\n Datos de contacto:  "+ "\n Nombre: "
+                + nombre  + "\n Apellido: " + apellido +"\n E-mail: "+ email + "\nComentario: "+ comentarios;
+                
+            mailServicio.recibirComentario( "huerta.agroecologica.misiones@gmail.com",  "huerta.agroecologica.misiones@gmail.com", mensaje);
+    modelo.put("exito", "Comentario enviado correctamente!");
+            return "/contacto.html";
+    }
 }
