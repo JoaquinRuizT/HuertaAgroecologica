@@ -20,9 +20,9 @@
                 <div class="menu">
                     <ul >
                         <li><a th:href="@{/inicio}">Inicio</a></li>
-                        <li><a href="#info">Información</a></li>
+                        <li><a th:href="@{/informacion}">Información</a></li>
                         <li><a th:href="@{/contact}">Contacto</a></li>
-                        <li><a href="#about">Nosotros</a></li>
+                        <li><a th:href="@{/nosotros}">Nosotros</a></li>
                         <li><a href="/logout">Cerrar Sesion</a></li>
                         <li sec:authorize="hasRole('ADMIN')"><a href="/admin/lista">Usuarios registrados</a></li>
 

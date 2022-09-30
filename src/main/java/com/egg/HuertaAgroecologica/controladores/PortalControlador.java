@@ -111,13 +111,13 @@ public class PortalControlador { //localhost:8080/??
             return "/contacto.html";
     }
     
+    @GetMapping("/informacion")
+    public String informacion() {
+        return "informacion.html";
+    }
+    
     @GetMapping("/nosotros")
     public String nosotros() {
         return "nosotros.html";
-    }
-    
-    @GetMapping("/equipo")
-    public String equipo() {
-        return "equipo.html";
     }
 }
