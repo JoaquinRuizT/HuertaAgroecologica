@@ -15,7 +15,18 @@
         <header th:replace="plantilla/template :: header">
 
         </header>
-
+<div th:if="${exito}!=null" class="card text-white bg-success mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Exito</h5>
+                <p class="card-text" th:text="${exito}"></p>
+            </div>
+        </div>
+        <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Error</h5>
+                <p class="card-text" th:text="${error}"></p>
+            </div>
+        </div>
         <div class="container">
             <header>Registro del cultivo</header>
             <form th:action="@{/cultivo/registro}" method="POST" enctype="multipart/form-data">
@@ -115,20 +126,9 @@
             <a th:href="@{/inicio}" class="btn btn-primary">Volver</a>
 
         </div>
-        <div th:if="${exito}!=null" class="card text-white bg-success mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Exito</h5>
-                <p class="card-text" th:text="${exito}"></p>
-            </div>
+        
         </div>
-        <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Error</h5>
-                <p class="card-text" th:text="${error}"></p>
-            </div>
-        </div>
-
-
+      
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
                 integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
         crossorigin="anonymous"></script>

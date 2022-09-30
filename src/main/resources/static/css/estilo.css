@@ -3,7 +3,7 @@
     padding: 0;
 }
 
-body, header, main, footer{
+body, header, main{
     min-height: 70px;
     margin:0.5rem;
     min-width: 400px;
