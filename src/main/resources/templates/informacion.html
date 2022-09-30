@@ -50,12 +50,12 @@ and open the template in the editor.
 
 
     </head>
-       <header th:replace="plantilla/template :: header">
+    <header th:replace="plantilla/template :: header">
 
-        </header>
+    </header>
     <body>
 
-     
+
 
         <main >
 
@@ -111,7 +111,7 @@ and open the template in the editor.
 
                         <h1 class="fw-normal">Huertas</h1>
                         <h1 class="fw-normal">Confiables</h1>
-                        
+
                         <p class="p">En caso que el administrador apruebe el 60% o más de tus publicaciones, tu huerta será calificada como confiable y podrás postear cultivos sin necesidad de aprobación del administrador del sitio.</h6>
 
                     </div><!-- /.col-lg-4 -->
@@ -133,25 +133,8 @@ and open the template in the editor.
 
 
         </main>
-        <div class="container">
-            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-                <p class="col-md-4 mb-0 text-muted">&copy; 2022 </p>
+        <footer th:replace="plantilla/template :: footer"> </footer>
 
-                <a href="/"
-                   class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-                    <svg class="bi me-2" width="40" height="32">
-                    <use xlink:href="#bootstrap" />
-                    </svg>
-                </a>
-
-                <ul class="nav col-md-4 justify-content-end">
-                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Inicio</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Contacto</a></li>
-
-                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Nosotros</a></li>
-                </ul>
-            </footer>
-        </div>
 
 
         <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
