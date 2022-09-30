@@ -110,4 +110,14 @@ public class PortalControlador { //localhost:8080/??
     modelo.put("exito", "Comentario enviado correctamente!");
             return "/contacto.html";
     }
+    
+    @GetMapping("/nosotros")
+    public String nosotros() {
+        return "nosotros.html";
+    }
+    
+    @GetMapping("/equipo")
+    public String equipo() {
+        return "equipo.html";
+    }
 }
