@@ -22,7 +22,6 @@ body {
   }
   /* Since positioning the image, we need to help out the caption */
   .carousel-item {
-    margin-top: 4rem;
     height: 28rem;
     background-color: rgba(5, 107, 22, 0.637);
   }
@@ -37,7 +36,6 @@ body {
   }
 
   .p{
-   margin-top: 10px;
    color: darkslategray;
   }
 
@@ -51,12 +49,92 @@ body {
 
   /* Declare heights because of positioning of img element */
 
+
+  
+  
+  /* CUSTOMIZE THE CAROUSEL
+  -------------------------------------------------- */
+  
+  /* Carousel base class */
+  .carousel {
+    margin-bottom: 0rem;
+  }
+
+  .carousel-caption{
+    height: 24rem;
+    
+  }
+  /* Since positioning the image, we need to help out the caption */
+  .carousel-item {
+    margin-top: 4rem;
+    height: 28rem;
+    background-color: rgba(5, 107, 22, 0.637);
+    background-image: url("../img/fond.jpg");
+    
+    
+   
+    
+
+  }
+
+  .bg-img {
+    /* The image used */
+    background-image: url("/confiable1.jpg");
+    margin: 0.5rem;
+    
+  /* Control the height of the image */
+  min-height: 180%; 
+  
+    
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    
+  }
+
+  .q{
+    color: rgba(43, 40, 40, 0.705);
+    margin-bottom: 20px;
+  }
+  .u{
+    color: rgba(43, 40, 40, 0.705);
+  }
+
+  .p{
+   color: darkslategray;
+  }
+
+  .fw-normal{
+    color: darkslategray;
+  }
+  .carousel-item active{
+    background-image: url("/confiable1.jpg");
+  }
+
+
+  /* Declare heights because of positioning of img element */
+
+
+  .carousel-caption {
+    bottom: 3rem;
+    z-index: 10;
+    color: blue;
+  }
+
+
+
   .carousel-inner {
     height: 22rem;
     background-image: url(/confiable1.jpg);
-
+    
+    
   /* Control the height of the image */
-    min-height: 180%; 
+  min-height: 180%; 
+  
+    
   
     /* Center and scale the image nicely */
     background-position: center;
