@@ -59,8 +59,8 @@ public class UsuarioServicio implements UserDetailsService {
         //AGREGAMOS FOTO DE PERFIL A USUARIO?
         usuarioRepositorio.save(usuario);
         
-        // mailServicio.enviarMail("Bienvenidos al Blog de Huertas Agroecológicas de Misiones!", 
-          //      "Ya estás registrado como usuario!", usuario.getEmail());
+        mailServicio.enviarMail("Bienvenidos al Blog de Huertas Agroecológicas de Misiones!", 
+                "Ya estás registrado como usuario!", usuario.getEmail());
 
     }
 
